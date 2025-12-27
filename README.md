@@ -1,36 +1,36 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Ravindu Ariyarathne - Portfolio
 
-## Getting Started
+Welcome to my personal portfolio repository! 
+This website showcases my journey as a software engineer, featuring my projects, technical skills, and professional experience.
 
-First, run the development server:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 📌 About This Portfolio
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+* Designed and developed using **Next.js** ⚡
+* Styled with **Tailwind CSS** for a fully responsive design 🎨
+* Deployed on **Vercel** for fast performance 🚀
+* Includes detailed showcases of my key projects: **SpendSense** and **ChatLink** 💻
+* Features an interactive **Contact Form** powered by EmailJS (Serverless) 📧
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🛠️ Tech Stack
 
-## Learn More
+**Frontend & Logic:**
+* <img src="./public/icons/nextjs-original.svg" width="20" height="20" /> **Next.js (App Router)**
+* <img src="./public/icons/react-original.svg" width="20" height="20" /> **React**
+* <img src="./public/icons/typescript-original.svg" width="20" height="20" /> **TypeScript**
+* <img src="./public/icons/tailwindcss-original.svg" width="20" height="20" /> **Tailwind CSS**
 
-To learn more about Next.js, take a look at the following resources:
+**Tools & Libraries:**
+* **Swiper.js:** For the skills carousel
+* **EmailJS:** For handling contact form emails without a backend
+* **Git & GitHub:** Version Control
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📬 Connect with Me
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+* **LinkedIn:** [Ravindu Ariyarathne](https://www.linkedin.com/in/ravindu-ariyarathne/)
+* **GitHub:** [RavinAr1](https://github.com/RavinAr1)
+* **Email:** [ravelakshan19@gmail.com](mailto:ravelakshan19@gmail.com)
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+*Thank you for visiting!*
