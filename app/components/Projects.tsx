@@ -20,9 +20,10 @@ const projects = [
     technologies: ["React", "Python", "Flask", "JavaScript", "Machine Learning"],
     link: "https://github.com/RavinAr1/SpendSense",
   },
+
   {
     title: "ChatLink",
-    description: "ChatLink is a real-time communication platform designed to facilitate seamless and secure messaging. Built on a Java Spring Boot foundation with a Thymeleaf frontend, it leverages WebSocket technology to deliver instant message synchronization and a responsive user experience across devices. The application features secure user authentication, support for file attachments within chats, and automated email notifications via API integration. With a scalable MySQL database for persistence and Docker support for streamlined deployment, ChatLink provides a reliable, full-stack solution for interactive connectivity..",
+    description: "ChatLink is a real-time communication platform designed to facilitate seamless and secure messaging. Built on a Java Spring Boot foundation with a Thymeleaf frontend, it leverages WebSocket technology to deliver instant message synchronization and a responsive user experience across devices. The application features secure user authentication, support for file attachments within chats, and automated email notifications via API integration. With a scalable MySQL database for persistence and Docker support for streamlined deployment, ChatLink provides a reliable, full-stack solution for interactive connectivity.",
     images: [
       "/projects/project2-1.jpg",
       "/projects/project2-2.jpg",
@@ -31,6 +32,19 @@ const projects = [
     link: "https://github.com/RavinAr1/ChatLink.git",
     demoLink: "https://chatlink-app-ravindu-f3bkbabrfmfahshx.westus3-01.azurewebsites.net", 
   },
+
+
+    {
+    title: "Personal Portfolio Website",
+    description: "A modern, high-performance personal website designed to showcase my software engineering portfolio and professional identity. Built with Next.js and TypeScript, it features a fully responsive, mobile-first design styled with Tailwind CSS. The application integrates Swiper.js for interactive UI elements, a custom video background for visual engagement, and a serverless contact form powered by EmailJS for direct communication. Deployed on Vercel, this project demonstrates my ability to build polished, scalable frontend solutions.",
+    images: [
+      "/projects/project2-1.jpg",
+      "/projects/project2-2.jpg",
+    ],
+    technologies: ["Next.js", "TypeScript", "Tailwind CSS",],
+    link: "https://github.com/RavinAr1/personal-portfolio",
+  },
+
 ];
 
 export default function Projects() {

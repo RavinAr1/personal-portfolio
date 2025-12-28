@@ -5,28 +5,22 @@ This website showcases my journey as a software engineer, featuring my projects,
 
 ## 🚀 Live Website
 
-👉 [**Visit My Portfolio**](https://ravindu-ar.vercel.app/)
+[**Visit My Portfolio**](https://ravindu-ariyarathne.vercel.app/)
 
 ## 📌 About This Portfolio
 
-* Designed and developed using **Next.js** ⚡
-* Styled with **Tailwind CSS** for a fully responsive design 🎨
-* Deployed on **Vercel** for fast performance 🚀
-* Includes detailed showcases of my key projects: **SpendSense** and **ChatLink** 💻
-* Features an interactive **Contact Form** powered by EmailJS (Serverless) 📧
+* Designed and developed using **Next.js**
+* Styled with **Tailwind CSS** for a fully responsive, mobile-first design
+* Showcases details about my projects, technical skills, and academic journey. 
+* Features a serverless **Contact Form** powered by **EmailJS** 
+* Deployed on **Vercel** 
 
 ## 🛠️ Tech Stack
 
-**Frontend & Logic:**
-* <img src="./public/icons/nextjs-original.svg" width="20" height="20" /> **Next.js (App Router)**
-* <img src="./public/icons/react-original.svg" width="20" height="20" /> **React**
-* <img src="./public/icons/typescript-original.svg" width="20" height="20" /> **TypeScript**
-* <img src="./public/icons/tailwindcss-original.svg" width="20" height="20" /> **Tailwind CSS**
-
-**Tools & Libraries:**
-* **Swiper.js:** For the skills carousel
-* **EmailJS:** For handling contact form emails without a backend
-* **Git & GitHub:** Version Control
+* **Frontend:** Next.js, Tailwind CSS, TypeScript
+* **Deployment:** Vercel
+* **Version Control:** Git & GitHub
+* **Libraries:** EmailJS, Swiper.js
 
 ## 📬 Connect with Me
 
