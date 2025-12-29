@@ -50,16 +50,13 @@ const projects = [
 export default function Projects() {
   return (
     <section id="projects" className="w-full max-w-5xl mx-auto py-20 px-1">
-      <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-12 text-center">
+      <h2 className="text-3xl font-bold text-white mb-12 text-center">
         My Projects
       </h2>
 
       <div className="flex flex-col gap-12">
   {projects.map((project, idx) => (
-    <div
-      key={idx}
-      className="bg-white dark:bg-gray-800 shadow-lg rounded-xl overflow-hidden hover:scale-[1.02] transform transition"
-    >
+    <div key={idx} className="bg-gray-900/40 backdrop-blur-md border border-white/10 shadow-lg rounded-xl overflow-hidden hover:scale-[1.02] transform transition">
       {/* Project Image Carousel */}
       {/* <Swiper
         navigation
@@ -81,11 +78,11 @@ export default function Projects() {
 
 
       <div className="p-6">
-        <h3 className="text-2xl font-semibold text-gray-900 dark:text-white mb-2">
+        <h3 className="text-2xl font-semibold text-white mb-2">
           {project.title}
         </h3>
 
-        <p className="text-gray-600 dark:text-gray-300 mb-4">
+        <p className="text-gray-300 mb-4">
           {project.description}
         </p>
 

@@ -6,10 +6,9 @@ import { SiHackerrank } from "react-icons/si";
 
 export default function Hero() {
   return (
-    <section
-      id="hero"
-      className="flex min-h-screen flex-col items-center justify-center bg-white dark:bg-transparent text-center px-6"
-    >
+    <section id="hero"
+     className="flex min-h-screen flex-col items-center justify-center bg-transparent text-center px-6">
+
       {/* Profile Image */}
       <Image
         src="/profile-image.jpg"
@@ -21,12 +20,12 @@ export default function Hero() {
       />
 
       {/* Heading */}
-      <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">
+      <h1 className="text-4xl font-bold text-white mb-2">
         Hi, I’m <span className="text-blue-600">Ravindu Ariyarathne</span>
       </h1>
 
       {/* Subheading */}
-      <h2 className="text-lg text-gray-600 dark:text-gray-300 mb-6">
+      <h2 className="text-lg text-gray-300 mb-6">
       Full-Stack Developer | Passionate About Building Smart Digital Solutions
       </h2>
 
