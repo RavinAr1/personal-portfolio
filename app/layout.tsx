@@ -23,11 +23,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    // CHANGE 1: Force dark mode and browser color scheme
-    <html lang="en" className="dark" style={{ colorScheme: "dark" }}>
+    <html lang="en">
       <body
-        // CHANGE 2: Add dark background (fallback) and white text
-        className={`${geistSans.variable} ${geistMono.variable} antialiased relative bg-slate-950 text-white`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased relative`}
       >
         {/* Background Video */}
         <video

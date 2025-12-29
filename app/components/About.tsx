@@ -11,11 +11,11 @@ export default function About() {
         id="about"
         className="w-full max-w-5xl mx-auto py-20 px-1 text-center sm:text-left"
       >
-        <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4 text-center sm:text-left">
+        <h2 className="text-3xl font-bold text-white mb-4 text-center sm:text-left">
           About Me
         </h2>
 
-        <p className="text-gray-700 dark:text-gray-300 leading-6 text-base mb-6">
+        <p className="text-gray-300 leading-6 text-base mb-6">
           I’m <span className="font-semibold text-blue-600">Ravindu Ariyarathne</span>, a  Software Engineering graduate with practical internship experience in full-stack development. 
           I’ve worked with Java, Spring Boot, MySQL, JavaScript, React and Python, and I enjoy learning new technologies while contributing to team projects. 
           I focus on building useful, user-friendly solutions and improving my skills through hands-on experience.
@@ -32,27 +32,27 @@ export default function About() {
 
                   {/* Degree */}
                   <div className="mb-6">
-                    <p className="text-gray-900 dark:text-white font-semibold">
+                    <p className="text-white font-semibold">
                       🎓 BEng (Hons) Software Engineering
                     </p>
                      
-                    <p className="text-gray-700 dark:text-gray-300 text-sm ml-7">
+                    <p className="text-gray-400 text-sm ml-7">
                       Jan 2022 – Sep 2025
                     </p>
-                    <p className="text-gray-700 dark:text-gray-300 text-sm ml-7">
+                    <p className="text-gray-200 text-sm ml-7">
                       University of Westminster (UK), IIT Sri Lanka
                     </p>
                   </div>
 
                   {/* A/L */}
                   <div className="mb-6">
-                    <p className="text-gray-900 dark:text-white font-semibold">
+                    <p className="text-white font-semibold">
                       🏫 G.C.E. Advanced Level Examination
                     </p>
-                    <p className="text-gray-700 dark:text-gray-300 text-sm">
+                    <p className="text-gray-400 text-sm">
                        <span className="ml-7">Physical Science Stream</span>
                     </p>
-                    <p className="text-gray-700 dark:text-gray-300 text-sm">
+                    <p className="text-gray-200 text-sm">
                       <span className="ml-7">Royal College – Colombo 07</span>
                     </p>
                   </div>
@@ -70,14 +70,14 @@ export default function About() {
                   <div className="mb-6">
                     
                     
-                    <p className="text-gray-900 dark:text-white font-semibold">
+                    <p className="text-white font-semibold">
                       💼 Undergraduate Intern – Software Engineering
                     </p>
                     
-                    <p className="text-gray-700 dark:text-gray-300 text-sm ml-7">
+                    <p className="text-gray-400 text-sm ml-7">
                       Aug 2023 – Aug 2024
                     </p>
-                    <p className="text-gray-700 dark:text-gray-300 text-sm ml-7">
+                    <p className="text-gray-200 text-sm ml-7">
                       National Development Bank PLC
                     </p>
 
@@ -96,7 +96,7 @@ export default function About() {
         id="technologies"
         className="w-full max-w-7xl mx-auto py-6 px-6 text-center"
       >
-        <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">
+        <h2 className="text-3xl font-bold text-white mb-6">
           Technical Skills & Tools
         </h2>
 
@@ -138,7 +138,7 @@ export default function About() {
             <SwiperSlide key={tech.name}>
               <div className="flex flex-col items-center">
                 <img src={tech.icon} className="w-12 h-12 mb-1" />
-                <span className="text-gray-700 dark:text-gray-300 text-sm">{tech.name}</span>
+                <span className="text-gray-300 text-sm">{tech.name}</span>
               </div>
             </SwiperSlide>
           ))}
