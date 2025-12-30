@@ -11,7 +11,7 @@ export default function Hero() {
 
       {/* Profile Image */}
       <Image
-        src="/profile-image.jpg"
+        src="/images/profile-image.jpg"
         alt="Profile photo"
         width={200}
         height={200}
