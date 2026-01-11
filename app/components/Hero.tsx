@@ -44,7 +44,7 @@ export default function Hero() {
           Contact Me
         </a>
         <a
-          href="/resume/Ravindu Ariyarathne - Resume - Trainee Software Engineer.pdf"
+          href="/resume/Ravindu Ariyarathne - Resume.pdf"
           download="Ravindu Ariyarathne - Resume"
           className="rounded-full border border-yellow-600 text-blue-600 px-6 py-3 font-medium hover:bg-blue-50 dark:hover:bg-blue-900/20 transition"
         >
