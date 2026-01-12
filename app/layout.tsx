@@ -1,49 +1,32 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+import type React from "react"
+import type { Metadata, Viewport } from "next"
+import { Inter } from "next/font/google"
+import { Analytics } from "@vercel/analytics/next"
+import "./globals.css"
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+const _inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Ravindu Ariyarathne - Portfolio",
-  description: "Personal portfolio website",
-};
+  title: "Ravindu Ariyarathne | Software Engineer",
+  description: "Reactive Grid Portfolio - Engineering-focused with interactive grid background",
+    generator: 'v0.app'
+}
+
+export const viewport: Viewport = {
+  themeColor: "#000000",
+}
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased relative`}
-      >
-        {/* Background Video */}
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="fixed top-0 left-0 w-full h-full object-cover -z-10"
-        >
-          <source src="/videos/background-video4.mp4" type="video/mp4" />
-        </video>
-
-        {/* Dark Overlay*/}
-        <div className="fixed inset-0 bg-black/40 -z-10"></div>
-
-        {/* Page content */}
+      <body className="font-sans antialiased">
         {children}
+        <Analytics />
       </body>
     </html>
-  );
+  )
 }
