@@ -5,9 +5,7 @@ import { useEffect, useRef, useState } from "react"
 import { motion } from "framer-motion"
 import { Mail, Phone, MapPin, Github, Linkedin } from "lucide-react"
 
-
-// --- MAIN COMPONENT ---
-// Type for trail cells
+// --- TYPES ---
 interface TrailCell {
   x: number
   y: number
@@ -19,9 +17,7 @@ export default function RavinduPortfolio() {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
   const trailRef = useRef<TrailCell[]>([])
 
-  
-
-  // --- CONSTANTS ---
+  // --- CONFIGURATION ---
   const GRID_SIZE = 40 
   const GLOW_RADIUS = 120 
   const FADE_SPEED = 0.01 
@@ -96,14 +92,28 @@ export default function RavinduPortfolio() {
   return (
     <div className="relative min-h-screen bg-[#020617] text-white overflow-x-hidden selection:bg-cyan-500/30">
       
-      {/* BACKGROUND CANVAS */}
+      {/* FIXED BACKGROUND CANVAS */}
       <canvas ref={canvasRef} className="fixed inset-0 pointer-events-none z-0" />
 
       {/* CONTENT LAYER */}
       <div className="relative z-10">
         
-        {/* HERO */}
-        <section className="min-h-screen flex flex-col items-center justify-center px-4">
+        {/* --- NAVBAR --- */}
+        <nav className="fixed top-0 left-0 right-0 z-50 border-b border-white/5 bg-[#020617]/70 backdrop-blur-md">
+          <div className="container mx-auto px-6 py-4 flex items-center justify-between">
+            <a href="#home" className="text-xl font-bold tracking-wider hover:text-cyan-400 transition-colors">
+              <span className="text-cyan-400">{'>'}</span> RAVINDU
+            </a>
+            <div className="flex items-center gap-8">
+              <a href="#about" className="text-sm font-light tracking-widest hover:text-cyan-400 transition-colors">ABOUT</a>
+              <a href="#projects" className="text-sm font-light tracking-widest hover:text-cyan-400 transition-colors">PROJECTS</a>
+              <a href="#contact" className="text-sm font-light tracking-widest hover:text-cyan-400 transition-colors">CONTACT</a>
+            </div>
+          </div>
+        </nav>
+
+        {/* --- HERO SECTION --- */}
+        <section id="home" className="min-h-screen flex flex-col items-center justify-center px-4 pt-20">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -118,7 +128,7 @@ export default function RavinduPortfolio() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-xl md:text-2xl text-gray-300 text-center mb-8 font-light"
           >
-            Full Stack Software Developer.
+            Full Stack Engineer.
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -126,19 +136,48 @@ export default function RavinduPortfolio() {
             transition={{ duration: 0.8, delay: 0.3 }}
             className="flex gap-6 mb-12"
           >
-            <SocialLink href="https://www.linkedin.com/in/ravindu-ariyarathne/" icon={<Linkedin className="w-6 h-6" />} label="LinkedIn" />
+            <SocialLink href="https://linkedin.com/in/ravindu-ariyarathne/" icon={<Linkedin className="w-6 h-6" />} label="LinkedIn" />
             <SocialLink href="https://github.com/RavinAr1" icon={<Github className="w-6 h-6" />} label="GitHub" />
             <SocialLink href="mailto:ravelakshan19@gmail.com" icon={<Mail className="w-6 h-6" />} label="Email" />
           </motion.div>
         </section>
 
-        {/* MARQUEE */}
+        {/* --- ABOUT ME SECTION --- */}
+        <section id="about" className="py-20 px-6">
+          <div className="container mx-auto max-w-4xl">
+            {/* Glass Container for text */}
+            <div className="bg-black/40 backdrop-blur-md border border-white/10 p-8 md:p-12 rounded-3xl relative overflow-hidden group hover:border-cyan-500/30 transition-colors duration-500">
+              
+              {/* Subtle internal gradient */}
+              <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+              <h2 className="text-3xl font-bold mb-8 relative z-10">
+                <span className="text-cyan-400">{'>'}</span> ABOUT ME
+              </h2>
+              
+              <div className="space-y-6 text-gray-300 leading-relaxed text-lg font-light relative z-10">
+                <p>
+                  I’m Ravindu Ariyarathne, a Software Engineering graduate with practical internship experience in full-stack development. 
+                  I possess a strong passion for building innovative web applications using technologies like 
+                  <span className="text-cyan-200"> Java, Spring Boot, MySQL, React, and Python</span>.
+                </p>
+                <p>
+                  With expertise in both frontend and backend ecosystems, I focus on creating scalable, efficient, and user-friendly solutions. 
+                  My work revolves around leveraging modern frameworks to deliver high-quality products that solve real-world problems, 
+                  while constantly refining my skills through hands-on experience and continuous learning.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* --- MARQUEE --- */}
         <section className="py-12 overflow-hidden border-y border-white/5 bg-white/[0.01] backdrop-blur-[2px]">
           <InfiniteMarquee />
         </section>
 
-        {/* PROJECTS SECTION */}
-        <section className="py-32 px-4 max-w-7xl mx-auto">
+        {/* --- PROJECTS SECTION --- */}
+        <section id="projects" className="py-32 px-4 max-w-7xl mx-auto">
           <h2 className="text-4xl md:text-5xl font-light text-center mb-24 tracking-tight">Featured Projects</h2>
           <div className="space-y-24">
             
@@ -175,12 +214,11 @@ export default function RavinduPortfolio() {
           </div>
         </section>
 
-        {/* CONTACT SECTION */}
-        <section className="py-32 px-4 max-w-7xl mx-auto">
+        {/* --- CONTACT SECTION --- */}
+        <section id="contact" className="py-32 px-4 max-w-7xl mx-auto">
           <h2 className="text-4xl md:text-5xl font-light text-center mb-20 tracking-tight">Get In Touch</h2>
           <div className="grid md:grid-cols-2 gap-16 items-start">
             
-            {/* Contact Info Links */}
             <div className="space-y-8">
               <ContactInfo 
                 href="mailto:ravelakshan19@gmail.com"
@@ -202,13 +240,12 @@ export default function RavinduPortfolio() {
               />
             </div>
             
-            {/* Contact Form (Now Glowing) */}
             <ContactForm />
             
           </div>
         </section>
 
-        {/* FOOTER */}
+        {/* --- FOOTER --- */}
         <footer className="py-12 text-center text-gray-600 border-t border-white/5 font-light text-sm">
           <p>© 2026 Ravindu Ariyarathne. All rights reserved.</p>
         </footer>
@@ -219,7 +256,6 @@ export default function RavinduPortfolio() {
 
 // --- SUB COMPONENTS ---
 
-// 1. SOCIAL LINK
 function SocialLink({ href, icon, label }: { href: string; icon: React.ReactNode; label: string }) {
   const [isHovered, setIsHovered] = useState(false)
 
@@ -231,7 +267,7 @@ function SocialLink({ href, icon, label }: { href: string; icon: React.ReactNode
       className="p-4 rounded-2xl transition-all duration-300 flex items-center justify-center bg-white/[0.02] border border-white/5"
       style={{
         transform: isHovered ? "translateY(-5px)" : "translateY(0)",
-        boxShadow: isHovered ? "0 0 25px rgba(6, 182, 212, 0.4)" : "none", // Cyan Glow
+        boxShadow: isHovered ? "0 0 25px rgba(6, 182, 212, 0.4)" : "none",
         borderColor: isHovered ? "rgba(6, 182, 212, 0.5)" : "rgba(255, 255, 255, 0.05)",
         color: isHovered ? "white" : "gray"
       }}
@@ -244,7 +280,6 @@ function SocialLink({ href, icon, label }: { href: string; icon: React.ReactNode
   )
 }
 
-// 2. CONTACT INFO LINK
 function ContactInfo({ icon, label, value, href }: { icon: React.ReactNode; label: string; value: string; href: string }) {
   const [isHovered, setIsHovered] = useState(false)
 
@@ -257,7 +292,7 @@ function ContactInfo({ icon, label, value, href }: { icon: React.ReactNode; labe
       style={{
         backgroundColor: isHovered ? "rgba(255, 255, 255, 0.03)" : "transparent",
         borderColor: isHovered ? "rgba(6, 182, 212, 0.5)" : "transparent",
-        boxShadow: isHovered ? "0 0 25px rgba(6, 182, 212, 0.2)" : "none", // Subtle Cyan Glow
+        boxShadow: isHovered ? "0 0 25px rgba(6, 182, 212, 0.2)" : "none",
         transform: isHovered ? "translateX(10px)" : "translateX(0)"
       }}
       onMouseEnter={() => setIsHovered(true)}
@@ -267,7 +302,7 @@ function ContactInfo({ icon, label, value, href }: { icon: React.ReactNode; labe
         className="p-4 rounded-2xl transition-colors duration-300"
         style={{
           backgroundColor: isHovered ? "rgba(6, 182, 212, 0.1)" : "rgba(255, 255, 255, 0.03)",
-          color: isHovered ? "#22d3ee" : "#22d3ee" // Cyan-400
+          color: isHovered ? "#22d3ee" : "#22d3ee"
         }}
       >
         {icon}
@@ -284,7 +319,6 @@ function ContactInfo({ icon, label, value, href }: { icon: React.ReactNode; labe
   )
 }
 
-// 3. NEW CONTACT FORM COMPONENT (WITH GLOW)
 function ContactForm() {
   const [isHovered, setIsHovered] = useState(false)
 
@@ -293,7 +327,7 @@ function ContactForm() {
       className="space-y-8 p-8 rounded-3xl border transition-all duration-500 bg-white/[0.02] backdrop-blur-[4px]"
       style={{
         borderColor: isHovered ? "rgba(6, 182, 212, 0.5)" : "rgba(255, 255, 255, 0.05)",
-        boxShadow: isHovered ? "0 0 30px rgba(6, 182, 212, 0.2)" : "none", // Subtle Cyan Glow
+        boxShadow: isHovered ? "0 0 30px rgba(6, 182, 212, 0.2)" : "none",
         transform: isHovered ? "translateY(-5px)" : "translateY(0)"
       }}
       onMouseEnter={() => setIsHovered(true)}
@@ -338,7 +372,6 @@ function ProjectCard({ title, description, tech, images, codeUrl, liveUrl, color
   const [currentImage, setCurrentImage] = useState(0)
   const [isHovered, setIsHovered] = useState(false)
 
-  // Configure Colors
   const isGreen = color === "green"
   const glowColor = isGreen ? "rgba(34, 197, 94, 0.4)" : "rgba(59, 130, 246, 0.4)"
   const borderColor = isGreen ? "rgba(34, 197, 94, 0.5)" : "rgba(59, 130, 246, 0.5)"
@@ -366,7 +399,6 @@ function ProjectCard({ title, description, tech, images, codeUrl, liveUrl, color
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Image Carousel */}
       <div className="relative aspect-video bg-black/40 rounded-2xl overflow-hidden">
         <img
           src={images[currentImage] || "/placeholder.svg"}
@@ -389,7 +421,6 @@ function ProjectCard({ title, description, tech, images, codeUrl, liveUrl, color
         </div>
       </div>
 
-      {/* Project Details */}
       <div className="flex flex-col justify-center">
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-3xl font-light tracking-tight text-white transition-colors"
@@ -412,7 +443,6 @@ function ProjectCard({ title, description, tech, images, codeUrl, liveUrl, color
           ))}
         </div>
 
-        {/* Buttons (Standard Static Colors) */}
         <div className="flex gap-4 mt-auto">
           <a
             href={codeUrl}
