@@ -11,7 +11,13 @@ import "swiper/css/pagination";
 const projects = [
   {
     title: "SpendSense",
-    description: "SpendSense is an AI-powered personal finance advisor that helps users make smarter budgeting, spending, and investment decisions. It analyzes income, expenses, and SMS-based transaction data to generate personalized budget plans, detect unusual financial activity, and deliver actionable insights. The system integrates machine learning models for multi-category expense prediction, anomaly detection from SMS alerts, stock forecasting. With a React-based dashboard and a Flask API backend, SpendSense provides real-time visualizations, intelligent recommendations, and an interactive chatbot designed to support users more effectively.",
+    description: `SpendSense is an AI-powered personal finance advisor that helps users make smarter budgeting,
+     spending, and investment decisions. It analyzes income, expenses, and SMS-based transaction data to generate
+      personalized budget plans, detect unusual financial activity, and deliver actionable insights. The system 
+      integrates machine learning models for multi-category expense prediction, anomaly detection from SMS alerts, 
+      stock forecasting. With a React-based dashboard and a Flask API backend, SpendSense provides real-time visualizations,
+       intelligent recommendations, and an interactive chatbot designed to support users more effectively.`,
+
     images: [
       "/images/projects/spendsense/spendsense-image1.png",
       "/images/projects/spendsense/spendsense-image2.png",
@@ -25,7 +31,12 @@ const projects = [
 
   {
     title: "ChatLink",
-    description: "ChatLink is a real-time communication platform designed to facilitate seamless and secure messaging. Built on a Java Spring Boot foundation with a Thymeleaf frontend, it leverages WebSocket technology to deliver instant message synchronization and a responsive user experience across devices. The application features secure user authentication, support for file attachments within chats, and automated email notifications via API integration. With a scalable MySQL database for persistence and Docker support for streamlined deployment, ChatLink provides a reliable, full-stack solution for interactive connectivity.",
+    description: `ChatLink is a real-time communication platform designed to facilitate seamless and secure messaging. 
+    Built on a Java Spring Boot foundation with a Thymeleaf frontend, it leverages WebSocket technology to deliver instant
+     message synchronization and a responsive user experience across devices. The application features secure user 
+     authentication, support for file attachments within chats, and automated email notifications via API integration. 
+     With a scalable MySQL database for persistence and Docker support for streamlined deployment, ChatLink provides a 
+     reliable, full-stack solution for interactive connectivity.`,
     images: [
       "/images/projects/chatlink/chatlink-image1.png",
       "/images/projects/chatlink/chatlink-image2.png",
@@ -41,7 +52,11 @@ const projects = [
 
     {
     title: "Personal Portfolio Website",
-    description: "A modern, high-performance personal website designed to showcase my software engineering portfolio and professional identity. Built with Next.js and TypeScript, it features a fully responsive, mobile-first design styled with Tailwind CSS. The application integrates Swiper.js for interactive UI elements, a custom video background for visual engagement, and a serverless contact form powered by EmailJS for direct communication. Deployed on Vercel, this project demonstrates my ability to build polished, scalable frontend solutions.",
+    description: `A modern, high-performance personal website designed to showcase my software engineering
+     portfolio and professional identity. Built with Next.js and TypeScript, it features a fully responsive, 
+     mobile-first design styled with Tailwind CSS. The application integrates Swiper.js for interactive UI elements,
+      a custom video background for visual engagement, and a serverless contact form powered by EmailJS for direct
+       communication. Deployed on Vercel, this project demonstrates my ability to build polished, scalable frontend solutions.`,
     images: [
       "/images/projects/portfolio-project/my-portfolio-image1.png",
       "/images/projects/portfolio-project/my-portfolio-image2.png",
