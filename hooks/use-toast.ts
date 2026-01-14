@@ -1,6 +1,6 @@
 'use client'
 
-// Inspired by react-hot-toast library
+// simple toast notification
 import * as React from 'react'
 
 import type { ToastActionElement, ToastProps } from '@/components/ui/toast'

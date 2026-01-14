@@ -8,7 +8,7 @@ interface FloatingCubeProps {
 }
 
 export default function FloatingCube({ icon, name, delay, position }: FloatingCubeProps) {
-  // Position cubes around the hero text
+  // Define positions for the cubes
   const positions = [
     { top: "20%", left: "15%", rotate: -15 },
     { top: "25%", right: "18%", rotate: 10 },

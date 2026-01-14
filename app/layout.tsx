@@ -9,7 +9,14 @@ const _inter = Inter({ subsets: ["latin"] })
 export const metadata: Metadata = {
   title: "Ravindu Ariyarathne | Software Engineer",
   description: "Reactive Grid Portfolio - Engineering-focused with interactive grid background",
-    generator: 'v0.app'
+
+icons: {
+    icon: '/images/logo.png', 
+    shortcut: '/logo.png',
+    apple: '/images/logo.png', 
+  },
+
+
 }
 
 export const viewport: Viewport = {
@@ -22,7 +29,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="scroll-smooth">
       <body className="font-sans antialiased">
         {children}
         <Analytics />

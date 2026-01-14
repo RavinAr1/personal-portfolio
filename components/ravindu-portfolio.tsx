@@ -3,7 +3,10 @@
 import type React from "react"
 import { useEffect, useRef, useState } from "react"
 import { motion } from "framer-motion"
-import { Mail, Phone, MapPin, Github, Linkedin } from "lucide-react"
+import Image from "next/image" 
+import { Mail, Phone, MapPin, Github, Linkedin, Download, Briefcase, GraduationCap } from "lucide-react"
+import emailjs from '@emailjs/browser'
+import { useToast } from "@/hooks/use-toast"
 
 // --- TYPES ---
 interface TrailCell {
@@ -92,84 +95,229 @@ export default function RavinduPortfolio() {
   return (
     <div className="relative min-h-screen bg-[#020617] text-white overflow-x-hidden selection:bg-cyan-500/30">
       
-      {/* FIXED BACKGROUND CANVAS */}
+      {/* BACKGROUND CANVAS */}
       <canvas ref={canvasRef} className="fixed inset-0 pointer-events-none z-0" />
 
       {/* CONTENT LAYER */}
       <div className="relative z-10">
         
+
+
         {/* --- NAVBAR --- */}
         <nav className="fixed top-0 left-0 right-0 z-50 border-b border-white/5 bg-[#020617]/70 backdrop-blur-md">
           <div className="container mx-auto px-6 py-4 flex items-center justify-between">
-            <a href="#home" className="text-xl font-bold tracking-wider hover:text-cyan-400 transition-colors">
-              <span className="text-cyan-400">{'>'}</span> RAVINDU
+
+        {/* Logo area */}
+            <a href="#home" className="flex items-center gap-3 group transition-colors">
+              
+              <div className="relative w-8 h-8 rounded-full overflow-hidden border 
+              border-cyan-500/30 group-hover:border-cyan-400 group-hover:shadow-[0_0_15px_rgba(6,182,212,0.4)] transition-all">
+                <Image 
+                  src="/images/logo.png" 
+                  alt="RA Logo" 
+                  fill 
+                  className="object-cover"
+                />
+              </div>
+              
+              {/* Logo Text */}
+              <span className="text-xl font-bold tracking-wider group-hover:text-cyan-400 text-white transition-colors">
+                RAVINDU
+              </span>
             </a>
+
+
+
+
             <div className="flex items-center gap-8">
               <a href="#about" className="text-sm font-light tracking-widest hover:text-cyan-400 transition-colors">ABOUT</a>
               <a href="#projects" className="text-sm font-light tracking-widest hover:text-cyan-400 transition-colors">PROJECTS</a>
               <a href="#contact" className="text-sm font-light tracking-widest hover:text-cyan-400 transition-colors">CONTACT</a>
+              <a href="#https://github.com/RavinAr1" target="_blank" rel="noopener noreferrer" className="text-sm 
+              font-light tracking-widest hover:text-cyan-400 transition-colors">GITHUB</a>
             </div>
           </div>
         </nav>
 
-        {/* --- HERO SECTION --- */}
+
+
+
+
+      {/* --- HERO SECTION --- */}
         <section id="home" className="min-h-screen flex flex-col items-center justify-center px-4 pt-20">
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-6xl md:text-8xl font-light text-center mb-4 tracking-tight"
-          >
-            Ravindu Ariyarathne
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-xl md:text-2xl text-gray-300 text-center mb-8 font-light"
-          >
-            Full Stack Engineer.
-          </motion.p>
+          
+          {/* Main Flex Container*/}
+          <div className="flex flex-col md:flex-row items-center gap-8 mb-12">
+            
+            {/* Profile Image */}
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8 }}
+              className="relative w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden border-2 
+              border-cyan-500/30 shadow-[0_0_40px_rgba(6,182,212,0.3)] shrink-0"
+            >
+              <Image 
+                src="/images/profile-image.jpg" 
+                alt="Ravindu Ariyarathne"
+                fill
+                className="object-cover"
+                priority
+              />
+            </motion.div>
+
+            {/* Text Container */}
+            <div className="flex flex-col items-center md:items-start text-center md:text-left">
+              
+              {/* Name */}
+              <motion.h1
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="text-5xl md:text-7xl font-light tracking-tight mb-4"
+              >
+                Ravindu <br className="hidden md:block" /> Ariyarathne
+              </motion.h1>
+
+              {/* Subtitle */}
+              <motion.p
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+                className="text-xl md:text-2xl text-gray-300 font-light"
+              >
+                Full Stack Software Developer
+              </motion.p>
+            </div>
+          </div>
+
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="flex gap-6 mb-12"
+            transition={{ duration: 0.8, delay: 0.5 }}
+            className="flex flex-col items-center gap-6 mb-12"
           >
-            <SocialLink href="https://linkedin.com/in/ravindu-ariyarathne/" icon={<Linkedin className="w-6 h-6" />} label="LinkedIn" />
-            <SocialLink href="https://github.com/RavinAr1" icon={<Github className="w-6 h-6" />} label="GitHub" />
-            <SocialLink href="mailto:ravelakshan19@gmail.com" icon={<Mail className="w-6 h-6" />} label="Email" />
+            {/* Social Icons */}
+            <div className="flex gap-6">
+              <SocialLink href="https://linkedin.com/in/ravindu-ariyarathne/" icon={<Linkedin className="w-6 h-6" />} label="LinkedIn" />
+              <SocialLink href="https://github.com/RavinAr1" icon={<Github className="w-6 h-6" />} label="GitHub" />
+              <SocialLink href="mailto:ravelakshan19@gmail.com" icon={<Mail className="w-6 h-6" />} label="Email" />
+            </div>
+
+            {/* Resume Download */}
+            <a 
+              href="/resume/Ravindu Ariyarathne - Resume.pdf" 
+              download="Ravindu Ariyarathne - Resume"
+              className="group relative flex items-center gap-3 px-8 py-3 bg-cyan-500/10 border border-cyan-500/50 rounded-full text-cyan-400 hover:bg-cyan-500 hover:text-black transition-all duration-300 font-medium tracking-wide shadow-[0_0_20px_rgba(6,182,212,0.2)] hover:shadow-[0_0_40px_rgba(6,182,212,0.6)]"
+            >
+              <span>Download Resume</span>
+              <Download className="w-4 h-4 group-hover:translate-y-1 transition-transform" />
+            </a>
           </motion.div>
         </section>
+
+
+
+
+
 
         {/* --- ABOUT ME SECTION --- */}
         <section id="about" className="py-20 px-6">
           <div className="container mx-auto max-w-4xl">
-            {/* Glass Container for text */}
-            <div className="bg-black/40 backdrop-blur-md border border-white/10 p-8 md:p-12 rounded-3xl relative overflow-hidden group hover:border-cyan-500/30 transition-colors duration-500">
+            
+
+            {/* About Me Card */}
+            <div className="bg-black/40 backdrop-blur-md border border-white/10 p-8 md:p-12 rounded-3xl relative 
+            overflow-hidden group hover:border-cyan-500/30 transition-colors duration-500">
               
-              {/* Subtle internal gradient */}
-              <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              {/* Gradient Overlay on Hover */}
+              <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-transparent opacity-0 group-
+              hover:opacity-100 transition-opacity duration-500" />
 
               <h2 className="text-3xl font-bold mb-8 relative z-10">
-                <span className="text-cyan-400">{'>'}</span> ABOUT ME
+                <span className="text-cyan-400"></span> ABOUT ME
               </h2>
               
               <div className="space-y-6 text-gray-300 leading-relaxed text-lg font-light relative z-10">
                 <p>
-                  I’m Ravindu Ariyarathne, a Software Engineering graduate with practical internship experience in full-stack development. 
-                  I possess a strong passion for building innovative web applications using technologies like 
-                  <span className="text-cyan-200"> Java, Spring Boot, MySQL, React, and Python</span>.
+                  I’m  <span className="text-cyan-200">Ravindu Ariyarathne</span>, a recent  
+                  <span className="text-cyan-200">Software Engineering</span> graduate with hands-on experience in full-stack development.
+                   I enjoy transforming ideas into reliable, intuitive, and meaningful software products that make a difference.
                 </p>
                 <p>
-                  With expertise in both frontend and backend ecosystems, I focus on creating scalable, efficient, and user-friendly solutions. 
-                  My work revolves around leveraging modern frameworks to deliver high-quality products that solve real-world problems, 
-                  while constantly refining my skills through hands-on experience and continuous learning.
+                  With experience in both frontend and backend ecosystems, I focus on designing and building scalable,
+                   reliable, and user-friendly systems. My approach revolves around continuous learning, improving my craft, 
+                   and delivering high-quality work through practical, real-world problem solving.
                 </p>
               </div>
+              
             </div>
           </div>
         </section>
+
+
+
+
+
+
+{/* ---  TIMELINE SECTION --- */}
+        <section className="py-20 px-6">
+          <div className="container mx-auto max-w-6xl">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-8">
+              
+              {/* Education Column */}
+              <div>
+                <h3 className="text-3xl font-light mb-8 flex items-center gap-3 text-cyan-400">
+                  <GraduationCap className="w-8 h-8" />
+                  <span>Education</span>
+                </h3>
+                
+                <div className="space-y-8 border-l border-white/10 pl-8 ml-3">
+                  <TimelineItem 
+                    title="BEng (Hons) Software Engineering"
+                    subtitle="University of Westminster (UK), IIT Sri Lanka"
+                    date="Jan 2022 – Sep 2025"
+                  />
+                  <TimelineItem 
+                    title="G.C.E. Advanced Level Examination(2019)"
+                    subtitle="Royal College – Colombo 07"
+                    date="Physical Science Stream"
+                  />
+                </div>
+              </div>
+
+              {/* Experience Column */}
+              <div>
+                <h3 className="text-3xl font-light mb-8 flex items-center gap-3 text-cyan-400">
+                  <Briefcase className="w-8 h-8" />
+                  <span>Experience</span>
+                </h3>
+
+                <div className="space-y-8 border-l border-white/10 pl-8 ml-3">
+                  <TimelineItem 
+                    title="Undergraduate Intern – Software Engineering"
+                    subtitle="National Development Bank PLC"
+                    date="Aug 2023 – Aug 2024"
+                  />
+
+                  <TimelineItem 
+                    title="Trainee – Personal Financial Services Department"
+                    subtitle="DFCC Bank PLC"
+                    date="Feb 2021 – June 2021"
+                  />
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+
+
+
+
+
+        
 
         {/* --- MARQUEE --- */}
         <section className="py-12 overflow-hidden border-y border-white/5 bg-white/[0.01] backdrop-blur-[2px]">
@@ -183,9 +331,20 @@ export default function RavinduPortfolio() {
             
             <ProjectCard
               title="SpendSense"
-              description="AI-powered finance advisor that helps you track expenses, analyze spending patterns, and get personalized financial insights using machine learning."
+              description="SpendSense is an AI-powered personal finance advisor that helps users make smarter budgeting,
+     spending, and investment decisions. It analyzes income, expenses, and SMS-based transaction data to generate
+      personalized budget plans, detect unusual financial activity, and deliver actionable insights. The system 
+      integrates machine learning models for multi-category expense prediction, anomaly detection from SMS alerts, 
+      stock forecasting. With a React-based dashboard and a Flask API backend, SpendSense provides real-time visualizations,
+       intelligent recommendations, and an interactive chatbot designed to support users more effectively."
+
               tech={["React", "Python", "Flask", "Machine Learning"]}
-              images={["/finance-dashboard-charts.png", "/expense-tracking-interface.jpg", "/budget-visualization.jpg"]}
+              images={["/images/projects/spendsense/spendsense-image1.png",
+                      "/images/projects/spendsense/spendsense-image2.png",
+                      "/images/projects/spendsense/spendsense-image3.png",
+                      "/images/projects/spendsense/spendsense-image4.png",
+                      "/images/projects/spendsense/spendsense-image5.png",]}
+
               codeUrl="https://github.com/RavinAr1/SpendSense"
               liveUrl="#"
               color="green" 
@@ -193,9 +352,19 @@ export default function RavinduPortfolio() {
 
             <ProjectCard
               title="ChatLink"
-              description="Real-time chat application with WebSocket support, featuring group chats, file sharing, and instant notifications for seamless communication."
+              description="ChatLink is a real-time communication platform designed to facilitate seamless and secure messaging. 
+    Built on a Java Spring Boot foundation with a Thymeleaf frontend, it leverages WebSocket technology to deliver instant
+     message synchronization and a responsive user experience across devices. The application features secure user 
+     authentication, support for file attachments within chats, and automated email notifications via API integration. 
+     With a scalable MySQL database for persistence and Docker support for streamlined deployment, ChatLink provides a 
+     reliable, full-stack solution for interactive connectivity."
+
               tech={["Java", "Spring Boot", "MySQL", "WebSocket"]}
-              images={["/modern-chat-interface.jpg", "/group-chat-messaging.jpg", "/chat-notifications.jpg"]}
+              images={["/images/projects/chatlink/chatlink-image1.png",
+                    "/images/projects/chatlink/chatlink-image2.png",
+                    "/images/projects/chatlink/chatlink-image3.png",
+                    "/images/projects/chatlink/chatlink-image4.png",
+                    "/images/projects/chatlink/chatlink-image5.png",]}
               codeUrl="https://github.com/RavinAr1/ChatLink.git"
               liveUrl="https://chatlink-app-ravindu-f3bkbabrfmfahshx.westus3-01.azurewebsites.net"
               color="blue" 
@@ -203,16 +372,48 @@ export default function RavinduPortfolio() {
 
             <ProjectCard
               title="Personal Portfolio"
-              description="Modern, responsive portfolio website with interactive animations, reactive grid background, and smooth user experience built with Next.js."
+              description="A modern, high-performance personal website designed to showcase my software engineering
+     portfolio and professional identity. Built with Next.js and TypeScript, it features a fully responsive, 
+     mobile-first design styled with Tailwind CSS. The application integrates Swiper.js for interactive UI elements,
+      a custom video background for visual engagement, and a serverless contact form powered by EmailJS for direct
+       communication. Deployed on Vercel, this project demonstrates my ability to build polished, scalable frontend solutions."
+       
               tech={["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"]}
-              images={["/dark-portfolio-with-grid.jpg", "/project-showcase-layout.jpg", "/responsive-design-portfolio.jpg"]}
+              images={["/images/projects/portfolio-project/my-portfolio-image1.png",
+                    "/images/projects/portfolio-project/my-portfolio-image2.png"]}
+
               codeUrl="https://github.com/RavinAr1/personal-portfolio"
               liveUrl="#"
-              color="blue"
+              color="yellow"
             />
+
+
+
+            <ProjectCard
+              title="Sinhala OCR & Document Converter"
+description="A specialized OCR tool designed to digitize Sinhala documents, converting scanned PDFs and images
+ into editable Word (.docx) files. It utilizes a customized Tesseract engine optimized for Sinhala Unicode to 
+ accurately extract text from scanned letters and exam papers."
+              tech={["Next.js", "Python", "FastAPI", "Tesseract OCR", "Docker"]}
+              images={[
+                "/images/projects/sinhala-document-converter/ocr-image1.png", 
+                "/images/projects/sinhala-document-converter/ocr-image2.png", 
+                "/images/projects/sinhala-document-converter/ocr-image3.png", 
+              ]}
+              codeUrl="https://github.com/RavinAr1/Sinhala-OCR-Converter"
+              liveUrl="https://sinhala-ocr-converter.vercel.app/" 
+              color="orange"
+            />
+
 
           </div>
         </section>
+
+
+
+
+
+
 
         {/* --- CONTACT SECTION --- */}
         <section id="contact" className="py-32 px-4 max-w-7xl mx-auto">
@@ -242,17 +443,23 @@ export default function RavinduPortfolio() {
             
             <ContactForm />
             
+            
           </div>
         </section>
 
         {/* --- FOOTER --- */}
         <footer className="py-12 text-center text-gray-600 border-t border-white/5 font-light text-sm">
-          <p>© 2026 Ravindu Ariyarathne. All rights reserved.</p>
+          <p>© 2025 Ravindu Ariyarathne. All rights reserved.</p>
         </footer>
+
+    
       </div>
     </div>
   )
 }
+
+
+
 
 // --- SUB COMPONENTS ---
 
@@ -280,6 +487,9 @@ function SocialLink({ href, icon, label }: { href: string; icon: React.ReactNode
   )
 }
 
+
+
+// --- CONTACT INFO COMPONENT ---
 function ContactInfo({ icon, label, value, href }: { icon: React.ReactNode; label: string; value: string; href: string }) {
   const [isHovered, setIsHovered] = useState(false)
 
@@ -319,11 +529,55 @@ function ContactInfo({ icon, label, value, href }: { icon: React.ReactNode; labe
   )
 }
 
+
+// --- CONTACT FORM COMPONENT ---
 function ContactForm() {
   const [isHovered, setIsHovered] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const formRef = useRef<HTMLFormElement>(null)
+  const { toast } = useToast()
 
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    setIsSubmitting(true)
+
+    // EmailJS Configuration
+    const SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!
+    const TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!
+    const PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
+
+    if (!formRef.current) return
+
+    emailjs
+      .sendForm(SERVICE_ID, TEMPLATE_ID, formRef.current, PUBLIC_KEY)
+      .then(
+        () => {
+          toast({
+            title: "Message Sent!",
+            description: "Thanks for reaching out. I'll get back to you soon.",
+            variant: "default",
+          })
+          formRef.current?.reset()
+        },
+        (error) => {
+          toast({
+            title: "Error",
+            description: "Something went wrong. Please try again later.",
+            variant: "destructive",
+          })
+          console.error("FAILED...", error.text)
+        }
+      )
+      .finally(() => {
+        setIsSubmitting(false)
+      })
+  }
+
+  
   return (
-    <div 
+    <form 
+      ref={formRef}
+      onSubmit={handleSubmit}
       className="space-y-8 p-8 rounded-3xl border transition-all duration-500 bg-white/[0.02] backdrop-blur-[4px]"
       style={{
         borderColor: isHovered ? "rgba(6, 182, 212, 0.5)" : "rgba(255, 255, 255, 0.05)",
@@ -333,22 +587,43 @@ function ContactForm() {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <Input placeholder="Name" />
-      <Input placeholder="Email" />
+      <Input name="user_name" placeholder="Name" required />
+      <Input name="user_email" type="email" placeholder="Email" required />
+      
       <textarea
+        name="message"
+        required
         rows={4}
-        className="w-full bg-transparent border-b border-white/10 py-4 focus:outline-none focus:border-cyan-500 transition-colors text-white placeholder:text-gray-600 resize-none"
+        className="w-full bg-transparent border-b border-white/10 py-4 focus:outline-none focus:border-cyan-500 
+        transition-colors text-white placeholder:text-gray-600 resize-none"
         placeholder="Message"
       />
-      <button className="px-10 py-4 border border-white/20 hover:bg-cyan-500/10 hover:border-cyan-500 hover:text-cyan-400 text-white rounded-full font-light transition-all duration-300 tracking-wide">
-        Send Message
+      <button 
+        type="submit"
+        disabled={isSubmitting}
+        className="px-10 py-4 border border-white/20 hover:bg-cyan-500/10 hover:border-cyan-500 
+        hover:text-cyan-400 text-white rounded-full font-light transition-all duration-300 tracking-wide disabled:opacity-50 disabled:cursor-not-allowed"
+      >
+        {isSubmitting ? "Sending..." : "Send Message"}
       </button>
-    </div>
+    </form>
   )
 }
 
+
+
+
+//Skills Carousel
 function InfiniteMarquee() {
-  const skills = [ "React", "Next.js", "Node.js", "TypeScript", "Tailwind CSS", "Java", "Spring Boot", "MySQL", "Python", "Flask", "Machine Learning", "Docker" ]
+  const skills = [ 
+    // Frontend
+    "React", "Next.js", "TypeScript", "Tailwind CSS",
+    // Backend
+    "Node.js", "Java", "Spring Boot", "Python", "FastAPI", "Flask", 
+    // Data & Communication
+    "MySQL", "REST API", , "Machine Learning", 
+    // DevOps & Tools
+    "Docker", "Git"]
   const duplicatedSkills = [...skills, ...skills, ...skills]
 
   return (
@@ -359,7 +634,8 @@ function InfiniteMarquee() {
         transition={{ x: { repeat: Number.POSITIVE_INFINITY, repeatType: "loop", duration: 40, ease: "linear" } }}
       >
         {duplicatedSkills.map((skill, index) => (
-          <div key={index} className="px-8 py-3 bg-white/[0.02] border border-white/5 rounded-full whitespace-nowrap text-gray-400 font-light tracking-wide">
+          <div key={index} className="px-8 py-3 bg-white/[0.02] border border-white/5 rounded-full 
+          whitespace-nowrap text-gray-400 font-light tracking-wide">
             {skill}
           </div>
         ))}
@@ -368,16 +644,69 @@ function InfiniteMarquee() {
   )
 }
 
+// --- PROJECT CARD COMPONENT ---
+// PROJECT CARD
 function ProjectCard({ title, description, tech, images, codeUrl, liveUrl, color }: any) {
   const [currentImage, setCurrentImage] = useState(0)
   const [isHovered, setIsHovered] = useState(false)
 
-  const isGreen = color === "green"
-  const glowColor = isGreen ? "rgba(34, 197, 94, 0.4)" : "rgba(59, 130, 246, 0.4)"
-  const borderColor = isGreen ? "rgba(34, 197, 94, 0.5)" : "rgba(59, 130, 246, 0.5)"
-  const pillStyle = isGreen 
-    ? "bg-green-500/[0.05] border-green-500/20 text-green-200/80" 
-    : "bg-blue-500/[0.05] border-blue-500/20 text-blue-200/80"
+  // --- COLOR CONFIGURATION ---
+  const colorVariants: any = {
+    green: {
+      glow: "rgba(34, 197, 94, 0.4)", // green-500
+      border: "rgba(34, 197, 94, 0.5)",
+      pill: "bg-green-500/[0.05] border-green-500/20 text-green-200/80",
+      title: "#4ade80", // green-400
+      indicator: "bg-green-400"
+    },
+    blue: {
+      glow: "rgba(59, 130, 246, 0.4)", // blue-500
+      border: "rgba(59, 130, 246, 0.5)",
+      pill: "bg-blue-500/[0.05] border-blue-500/20 text-blue-200/80",
+      title: "#60a5fa", // blue-400
+      indicator: "bg-blue-400"
+    },
+    purple: {
+      glow: "rgba(168, 85, 247, 0.4)", // purple-500
+      border: "rgba(168, 85, 247, 0.5)",
+      pill: "bg-purple-500/[0.05] border-purple-500/20 text-purple-200/80",
+      title: "#c084fc", // purple-400
+      indicator: "bg-purple-400"
+    },
+    orange: {
+      glow: "rgba(249, 115, 22, 0.4)", // orange-500
+      border: "rgba(249, 115, 22, 0.5)",
+      pill: "bg-orange-500/[0.05] border-orange-500/20 text-orange-200/80",
+      title: "#fb923c", // orange-400
+      indicator: "bg-orange-400"
+    },
+    pink: {
+      glow: "rgba(236, 72, 153, 0.4)", // pink-500
+      border: "rgba(236, 72, 153, 0.5)",
+      pill: "bg-pink-500/[0.05] border-pink-500/20 text-pink-200/80",
+      title: "#f472b6", // pink-400
+      indicator: "bg-pink-400"
+    },
+    red: {
+      glow: "rgba(239, 68, 68, 0.4)", // red-500
+      border: "rgba(239, 68, 68, 0.5)",
+      pill: "bg-red-500/[0.05] border-red-500/20 text-red-200/80",
+      title: "#f87171", // red-400
+      indicator: "bg-red-400"
+    },
+    yellow: {
+      glow: "rgba(234, 179, 8, 0.4)", // yellow-500
+      border: "rgba(234, 179, 8, 0.5)",
+      pill: "bg-yellow-500/[0.05] border-yellow-500/20 text-yellow-200/80",
+      title: "#facc15", // yellow-400
+      indicator: "bg-yellow-400"
+    }
+  }
+
+
+
+  //Default to blue if color not found
+  const theme = colorVariants[color] || colorVariants.blue
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -388,17 +717,19 @@ function ProjectCard({ title, description, tech, images, codeUrl, liveUrl, color
 
   return (
     <div 
-      className="grid md:grid-cols-2 gap-10 rounded-3xl overflow-hidden p-6 md:p-8 transition-all duration-500 bg-white/[0.02] backdrop-blur-[4px] border border-white/5"
+      className="grid md:grid-cols-2 gap-10 rounded-3xl overflow-hidden p-6 md:p-8 transition-all duration-500 
+      bg-white/[0.02] backdrop-blur-[4px] border border-white/5"
       style={{
         transform: isHovered ? "translateY(-5px)" : "translateY(0)",
         boxShadow: isHovered 
-          ? `0 20px 60px -10px rgba(0,0,0,0.5), 0 0 40px ${glowColor}` 
+          ? `0 20px 60px -10px rgba(0,0,0,0.5), 0 0 40px ${theme.glow}` 
           : "none",
-        borderColor: isHovered ? borderColor : "rgba(255, 255, 255, 0.05)"
+        borderColor: isHovered ? theme.border : "rgba(255, 255, 255, 0.05)"
       }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
+      {/* Image Carousel */}
       <div className="relative aspect-video bg-black/40 rounded-2xl overflow-hidden">
         <img
           src={images[currentImage] || "/placeholder.svg"}
@@ -406,6 +737,8 @@ function ProjectCard({ title, description, tech, images, codeUrl, liveUrl, color
           className="w-full h-full object-cover transition-transform duration-700"
           style={{ transform: isHovered ? "scale(1.05)" : "scale(1)" }}
         />
+        
+        {/* Progress Bar */}
         <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-10">
           {images.map((_: any, idx: number) => (
             <button
@@ -413,7 +746,7 @@ function ProjectCard({ title, description, tech, images, codeUrl, liveUrl, color
               onClick={() => setCurrentImage(idx)}
               className={`h-1 rounded-full transition-all duration-300 ${
                 idx === currentImage 
-                  ? (isGreen ? "bg-green-400 w-8" : "bg-blue-400 w-8") 
+                  ? `${theme.indicator} w-8` // Dynamic Indicator Color
                   : "bg-white/20 w-2 hover:bg-white/40"
               }`}
             />
@@ -421,10 +754,12 @@ function ProjectCard({ title, description, tech, images, codeUrl, liveUrl, color
         </div>
       </div>
 
+
+      {/* Project Details */}
       <div className="flex flex-col justify-center">
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-3xl font-light tracking-tight text-white transition-colors"
-              style={{ color: isHovered ? (isGreen ? "#4ade80" : "#60a5fa") : "white" }}
+              style={{ color: isHovered ? theme.title : "white" }} // Dynamic Title Color
           >
             {title}
           </h3>
@@ -432,43 +767,80 @@ function ProjectCard({ title, description, tech, images, codeUrl, liveUrl, color
         
         <p className="text-gray-400 mb-8 leading-relaxed font-light">{description}</p>
 
+        {/* Tech Tags */}
         <div className="flex flex-wrap gap-3 mb-10">
           {tech.map((item: string) => (
             <span
               key={item}
-              className={`px-4 py-1.5 border rounded-full text-sm font-light transition-colors duration-300 ${isHovered ? pillStyle : "bg-white/[0.02] border-white/10 text-gray-400"}`}
+              className={`px-4 py-1.5 border rounded-full text-sm font-light transition-colors 
+                duration-300 ${isHovered ? theme.pill : "bg-white/[0.02] border-white/10 text-gray-400"}`} // Dynamic Pill Style
             >
               {item}
             </span>
           ))}
         </div>
 
+      {/* Buttons */}
         <div className="flex gap-4 mt-auto">
+          {/* View Code */}
           <a
             href={codeUrl}
             target="_blank"
-            className="flex-1 px-6 py-3 border border-white/10 hover:bg-white hover:text-black text-center rounded-lg font-light transition-all duration-300 text-sm tracking-wide text-white"
+            className="flex-1 px-6 py-3 border border-white/10 hover:bg-white hover:text-black text-center 
+            rounded-lg font-light transition-all duration-300 text-sm tracking-wide text-white"
           >
             View Code
           </a>
-          <a
-            href={liveUrl}
-            target="_blank"
-            className="flex-1 px-6 py-3 bg-cyan-500 hover:bg-cyan-400 text-black text-center rounded-lg font-normal transition-all duration-300 text-sm tracking-wide"
-          >
-            Live Demo
-          </a>
+
+          {/* Live Demo - if liveUrl exists and not a '#' */}
+          {liveUrl && liveUrl !== "#" && (
+            <a
+              href={liveUrl}
+              target="_blank"
+              className="flex-1 px-6 py-3 bg-cyan-500 hover:bg-cyan-400 text-black text-center 
+              rounded-lg font-normal transition-all duration-300 text-sm tracking-wide"
+            >
+              Live Demo
+            </a>
+          )}
         </div>
+      </div>
+    </div>
+    
+  )
+}
+
+
+
+
+// ---  TIMELINE  ---
+function TimelineItem({ title, subtitle, date }: { title: string, subtitle: string, date: string }) {
+  return (
+    <div className="relative group">
+      {/* Dot on the line */}
+      <div className="absolute -left-[39px] top-1 w-5 h-5 rounded-full border-2 border-cyan-500/50 bg-[#020617] 
+      group-hover:bg-cyan-500 group-hover:shadow-[0_0_10px_rgba(6,182,212,0.6)] transition-all duration-300" />
+      
+      <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-cyan-500/30 transition-colors duration-300">
+        <h4 className="text-xl font-medium text-white mb-2">{title}</h4>
+        <p className="text-cyan-200/80 mb-1 font-light">{subtitle}</p>
+        <p className="text-gray-500 text-sm font-light tracking-wide">{date}</p>
       </div>
     </div>
   )
 }
 
-function Input({ placeholder }: { placeholder: string }) {
+
+
+// --- FORM INPUT COMPONENT ---
+function Input({ placeholder, name, type = "text", required = false }: { placeholder: string, name: string, type?: string, required?: boolean }) {
   return (
     <input
-      type="text"
-      className="w-full bg-transparent border-b border-white/10 py-4 focus:outline-none focus:border-cyan-500 transition-colors text-white placeholder:text-gray-600"
+      type={type}
+      name={name}
+      required={required}
+      className="w-full bg-transparent border-b border-white/10 py-4 focus:outline-none focus:border-cyan-500 
+      transition-colors text-white placeholder:text-gray-600"
       placeholder={placeholder}
     />
   )
