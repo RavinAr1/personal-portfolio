@@ -15,10 +15,10 @@ export default function Contact() {
 
     emailjs
       .sendForm(
-        "service_0ikfs5n",
-        "template_62gg0gl",
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
         formRef.current,
-        "KPDa5YSa96mzGVEKc"
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
       )
       .then(
         () => {
@@ -108,7 +108,7 @@ export default function Contact() {
           />
           <button
             type="submit"
-            className="bg-blue-600 text-white px-6 py-3 rounded-full font-medium hover:bg-blue-700 transition mt-2"
+            className="bg-blue-600 text-white px-6 py-3 rounded-full font-medium hover:b  g-blue-700 transition mt-2"
           >
             Send Message
           </button>
