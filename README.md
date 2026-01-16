@@ -1,3 +1,6 @@
+##### Branch for the Older Version - Live link redirects to the newer one
+
+
 # Ravindu Ariyarathne - Portfolio
 
 Welcome to my personal portfolio repository! 
@@ -26,7 +29,6 @@ This website showcases my journey as a software engineer, featuring my projects,
 
 * **LinkedIn:** [Ravindu Ariyarathne](https://www.linkedin.com/in/ravindu-ariyarathne/)
 * **GitHub:** [RavinAr1](https://github.com/RavinAr1)
-* **Email:** [ravelakshan19@gmail.com](mailto:ravelakshan19@gmail.com)
-
+* **Contact Me:** [Send a message via my Portfolio](https://ravindu-ariyarathne.vercel.app/#contact)
 ---
 *Thank you for visiting!*
