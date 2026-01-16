@@ -4,7 +4,7 @@ import type React from "react"
 import { useEffect, useRef, useState } from "react"
 import { motion } from "framer-motion"
 import Image from "next/image" 
-import { Mail, Phone, MapPin, Github, Linkedin, Download, Briefcase, GraduationCap } from "lucide-react"
+import { Mail, Phone, MapPin, Github, Linkedin, Download, Briefcase, GraduationCap, Menu, X } from "lucide-react"
 import emailjs from '@emailjs/browser'
 import { useToast } from "@/hooks/use-toast"
 
@@ -16,8 +16,14 @@ interface TrailCell {
 }
 
 export default function RavinduPortfolio() {
+
   const canvasRef = useRef<HTMLCanvasElement>(null)
+  // Mouse position state
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
+  
+  // Mobile menu state
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  
   const trailRef = useRef<TrailCell[]>([])
 
   // --- CONFIGURATION ---
@@ -64,6 +70,8 @@ export default function RavinduPortfolio() {
         ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(canvas.width, y); ctx.stroke()
       }
 
+
+
       // Draw Trails
       for (let i = trailRef.current.length - 1; i >= 0; i--) {
         const point = trailRef.current[i]
@@ -76,6 +84,8 @@ export default function RavinduPortfolio() {
         if (point.opacity <= 0) trailRef.current.splice(i, 1)
       }
 
+
+      
       // Draw Mouse
       const mouseGradient = ctx.createRadialGradient(mousePos.x, mousePos.y, 0, mousePos.x, mousePos.y, GLOW_RADIUS)
       mouseGradient.addColorStop(0, "rgba(6, 182, 212, 0.5)")
@@ -104,41 +114,56 @@ export default function RavinduPortfolio() {
 
 
         {/* --- NAVBAR --- */}
-        <nav className="fixed top-0 left-0 right-0 z-50 border-b border-white/5 bg-[#020617]/70 backdrop-blur-md">
+        <nav className="fixed top-0 left-0 right-0 z-50 border-b border-white/5 bg-[#020617]/80 backdrop-blur-md">
           <div className="container mx-auto px-6 py-4 flex items-center justify-between">
 
-        {/* Logo area */}
-            <a href="#home" className="flex items-center gap-3 group transition-colors">
-              
-              <div className="relative w-8 h-8 rounded-full overflow-hidden border 
-              border-cyan-500/30 group-hover:border-cyan-400 group-hover:shadow-[0_0_15px_rgba(6,182,212,0.4)] transition-all">
-                <Image 
-                  src="/images/logo.png" 
-                  alt="RA Logo" 
-                  fill 
-                  className="object-cover"
-                />
+            {/* Logo area */}
+            <a href="#home" className="flex items-center gap-3 group transition-colors relative z-50">
+              <div className="relative w-8 h-8 rounded-full overflow-hidden border border-cyan-500/30 
+              group-hover:border-cyan-400 group-hover:shadow-[0_0_15px_rgba(6,182,212,0.4)] transition-all">
+                <Image src="/images/logo.png" alt="RA Logo" fill className="object-cover" />
               </div>
-              
-              {/* Logo Text */}
               <span className="text-xl font-bold tracking-wider group-hover:text-cyan-400 text-white transition-colors">
                 RAVINDU
               </span>
             </a>
 
-
-
-
-            <div className="flex items-center gap-8">
+            {/* Desktop Menu */}
+            <div className="hidden md:flex items-center gap-8">
               <a href="#about" className="text-sm font-light tracking-widest hover:text-cyan-400 transition-colors">ABOUT</a>
               <a href="#projects" className="text-sm font-light tracking-widest hover:text-cyan-400 transition-colors">PROJECTS</a>
               <a href="#contact" className="text-sm font-light tracking-widest hover:text-cyan-400 transition-colors">CONTACT</a>
-              <a href="#https://github.com/RavinAr1" target="_blank" rel="noopener noreferrer" className="text-sm 
-              font-light tracking-widest hover:text-cyan-400 transition-colors">GITHUB</a>
+              <a href="https://github.com/RavinAr1" target="_blank" rel="noopener noreferrer" className="text-sm font-light tracking-widest hover:text-cyan-400 transition-colors">GITHUB</a>
             </div>
-          </div>
-        </nav>
 
+            {/* Mobile Menu */}
+            <button className="md:hidden text-white relative z-50" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
+              {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </div>
+
+          {/* Mobile Menu Overlay */}
+          {isMobileMenuOpen && (
+            <motion.div 
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="absolute top-0 left-0 w-full bg-[#020617] border-b 
+              border-white/10 pt-24 pb-10 px-6 flex flex-col gap-6 md:hidden shadow-2xl"
+            >
+              <a href="#about" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-light 
+              tracking-widest hover:text-cyan-400">ABOUT</a>
+
+              <a href="#projects" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-light 
+              tracking-widest hover:text-cyan-400">PROJECTS</a>
+
+              <a href="#contact" onClick={() => setIsMobileMenuOpen(false)} className="text-lg font-light 
+              tracking-widest hover:text-cyan-400">CONTACT</a>
+
+              <a href="https://github.com/RavinAr1" target="_blank" rel="noopener noreferrer" 
+              className="text-lg font-light tracking-widest hover:text-cyan-400">GITHUB</a>
+            </motion.div>
+          )}
+        </nav>
 
 
 
@@ -176,6 +201,7 @@ export default function RavinduPortfolio() {
                 transition={{ duration: 0.8, delay: 0.2 }}
                 className="text-5xl md:text-7xl font-light tracking-tight mb-4"
               >
+
                 Ravindu <br className="hidden md:block" /> Ariyarathne
               </motion.h1>
 
@@ -325,20 +351,20 @@ export default function RavinduPortfolio() {
         </section>
 
         {/* --- PROJECTS SECTION --- */}
-        <section id="projects" className="py-32 px-4 max-w-7xl mx-auto">
+        <section id="projects" className="py-20 md:py-32 px-4 max-w-7xl mx-auto">
           <h2 className="text-4xl md:text-5xl font-light text-center mb-24 tracking-tight">Featured Projects</h2>
           <div className="space-y-24">
             
             <ProjectCard
               title="SpendSense"
               description="SpendSense is an AI-powered personal finance advisor that helps users make smarter budgeting,
-     spending, and investment decisions. It analyzes income, expenses, and SMS-based transaction data to generate
-      personalized budget plans, detect unusual financial activity, and deliver actionable insights. The system 
-      integrates machine learning models for multi-category expense prediction, anomaly detection from SMS alerts, 
-      stock forecasting. With a React-based dashboard and a Flask API backend, SpendSense provides real-time visualizations,
-       intelligent recommendations, and an interactive chatbot designed to support users more effectively."
+                spending, and investment decisions. It analyzes income, expenses, and SMS-based transaction data to generate
+                personalized budget plans, detect unusual financial activity, and deliver actionable insights. The system 
+                integrates machine learning models for multi-category expense prediction, anomaly detection from SMS alerts, 
+                stock forecasting. With a React-based dashboard and a Flask API backend, SpendSense provides real-time visualizations,
+                intelligent recommendations, and an interactive chatbot designed to support users more effectively."
 
-              tech={["React", "Python", "Flask", "Machine Learning"]}
+              tech={["React", "Python", "Flask", "JavaScript", "Machine Learning"]}
               images={["/images/projects/spendsense/spendsense-image1.png",
                       "/images/projects/spendsense/spendsense-image2.png",
                       "/images/projects/spendsense/spendsense-image3.png",
@@ -353,13 +379,13 @@ export default function RavinduPortfolio() {
             <ProjectCard
               title="ChatLink"
               description="ChatLink is a real-time communication platform designed to facilitate seamless and secure messaging. 
-    Built on a Java Spring Boot foundation with a Thymeleaf frontend, it leverages WebSocket technology to deliver instant
-     message synchronization and a responsive user experience across devices. The application features secure user 
-     authentication, support for file attachments within chats, and automated email notifications via API integration. 
-     With a scalable MySQL database for persistence and Docker support for streamlined deployment, ChatLink provides a 
-     reliable, full-stack solution for interactive connectivity."
+                Built on a Java Spring Boot foundation with a Thymeleaf frontend, it leverages WebSocket technology to deliver instant
+                message synchronization and a responsive user experience across devices. The application features secure user 
+                authentication, support for file attachments within chats, and automated email notifications via API integration. 
+                With a scalable MySQL database for persistence and Docker support for streamlined deployment, ChatLink provides a 
+                reliable, full-stack solution for interactive connectivity."
 
-              tech={["Java", "Spring Boot", "MySQL", "WebSocket"]}
+              tech={["Java", "Spring Boot", "MySQL", "Thymeleaf", "Docker","WebSocket"]}
               images={["/images/projects/chatlink/chatlink-image1.png",
                     "/images/projects/chatlink/chatlink-image2.png",
                     "/images/projects/chatlink/chatlink-image3.png",
@@ -373,12 +399,12 @@ export default function RavinduPortfolio() {
             <ProjectCard
               title="Personal Portfolio"
               description="A modern, high-performance personal website designed to showcase my software engineering
-     portfolio and professional identity. Built with Next.js and TypeScript, it features a fully responsive, 
-     mobile-first design styled with Tailwind CSS. The application integrates Swiper.js for interactive UI elements,
-      a custom video background for visual engagement, and a serverless contact form powered by EmailJS for direct
-       communication. Deployed on Vercel, this project demonstrates my ability to build polished, scalable frontend solutions."
+                portfolio and professional identity. Built with Next.js and TypeScript, it features a fully responsive, 
+                mobile-first design styled with Tailwind CSS. The application integrates Swiper.js for interactive UI elements,
+                a custom video background for visual engagement, and a serverless contact form powered by EmailJS for direct
+                communication. Deployed on Vercel, this project demonstrates my ability to build polished, scalable frontend solutions."
        
-              tech={["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"]}
+              tech={["Next.js", "TypeScript", "Tailwind CSS","EmailJS"]}
               images={["/images/projects/portfolio-project/my-portfolio-image1.png",
                     "/images/projects/portfolio-project/my-portfolio-image2.png"]}
 
@@ -391,9 +417,10 @@ export default function RavinduPortfolio() {
 
             <ProjectCard
               title="Sinhala OCR & Document Converter"
-description="A specialized OCR tool designed to digitize Sinhala documents, converting scanned PDFs and images
- into editable Word (.docx) files. It utilizes a customized Tesseract engine optimized for Sinhala Unicode to 
- accurately extract text from scanned letters and exam papers."
+                description="A specialized OCR tool designed to digitize Sinhala documents, converting scanned PDFs and images
+                into editable Word (.docx) files. It utilizes a customized Tesseract engine optimized for Sinhala Unicode to 
+                accurately extract text from scanned letters and exam papers."
+
               tech={["Next.js", "Python", "FastAPI", "Tesseract OCR", "Docker"]}
               images={[
                 "/images/projects/sinhala-document-converter/ocr-image1.png", 
@@ -402,7 +429,7 @@ description="A specialized OCR tool designed to digitize Sinhala documents, conv
               ]}
               codeUrl="https://github.com/RavinAr1/Sinhala-OCR-Converter"
               liveUrl="https://sinhala-ocr-converter.vercel.app/" 
-              color="orange"
+              color="pink"
             />
 
 
@@ -416,7 +443,7 @@ description="A specialized OCR tool designed to digitize Sinhala documents, conv
 
 
         {/* --- CONTACT SECTION --- */}
-        <section id="contact" className="py-32 px-4 max-w-7xl mx-auto">
+        <section id="contact" className="py-20 md:py-32 px-4 max-w-7xl mx-auto">
           <h2 className="text-4xl md:text-5xl font-light text-center mb-20 tracking-tight">Get In Touch</h2>
           <div className="grid md:grid-cols-2 gap-16 items-start">
             
