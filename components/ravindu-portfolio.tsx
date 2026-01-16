@@ -4,7 +4,7 @@ import type React from "react"
 import { useEffect, useRef, useState } from "react"
 import { motion } from "framer-motion"
 import Image from "next/image" 
-import { Mail, Phone, MapPin, Github, Linkedin, Download, Briefcase, GraduationCap, Menu, X } from "lucide-react"
+import { Mail, Phone, MapPin, Github, Linkedin, Download, Briefcase, GraduationCap, Menu, X, Eye } from "lucide-react"
 import emailjs from '@emailjs/browser'
 import { useToast } from "@/hooks/use-toast"
 
@@ -230,15 +230,41 @@ export default function RavinduPortfolio() {
               <SocialLink href="mailto:ravelakshan19@gmail.com" icon={<Mail className="w-6 h-6" />} label="Email" />
             </div>
 
-            {/* Resume Download */}
-            <a 
-              href="/resume/Ravindu Ariyarathne - Resume.pdf" 
-              download="Ravindu Ariyarathne - Resume"
-              className="group relative flex items-center gap-3 px-8 py-3 bg-cyan-500/10 border border-cyan-500/50 rounded-full text-cyan-400 hover:bg-cyan-500 hover:text-black transition-all duration-300 font-medium tracking-wide shadow-[0_0_20px_rgba(6,182,212,0.2)] hover:shadow-[0_0_40px_rgba(6,182,212,0.6)]"
-            >
-              <span>Download Resume</span>
-              <Download className="w-4 h-4 group-hover:translate-y-1 transition-transform" />
-            </a>
+            {/* Resume Section */}
+            
+            <div className="flex items-center gap-1 p-1 bg-cyan-500/10 border border-cyan-500/50 rounded-full pl-6 pr-1 
+            shadow-[0_0_20px_rgba(6,182,212,0.2)] hover:shadow-[0_0_40px_rgba(6,182,212,0.4)] transition-all duration-300 group">
+              
+              {/* RESUME LABEL */}
+              <span className="text-cyan-400 font-medium tracking-widest text-xs md:text-sm mr-2">RESUME</span>
+              
+            {/* Separator */}
+              <div className="w-px h-4 bg-cyan-500/30 mx-1" />
+
+              {/* View Button*/}
+              <a 
+                href="/resume/Ravindu Ariyarathne - Resume.pdf" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-3 rounded-full hover:bg-cyan-500 hover:text-black text-cyan-400 transition-all duration-300"
+                aria-label="View Resume"
+                title="View Resume"
+              >
+                <Eye className="w-4 h-4" />
+              </a>
+
+              {/* Download Button */}
+              <a 
+                href="/resume/Ravindu Ariyarathne - Resume.pdf" 
+                download="Ravindu Ariyarathne - Resume"
+                className="p-3 rounded-full hover:bg-cyan-500 hover:text-black text-cyan-400 transition-all duration-300"
+                aria-label="Download Resume"
+                title="Download Resume"
+              >
+                <Download className="w-4 h-4" />
+              </a>
+
+            </div>
           </motion.div>
         </section>
 
