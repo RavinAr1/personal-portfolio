@@ -6,7 +6,7 @@ import { motion } from "framer-motion"
 import Image from "next/image" 
 import { Mail, Phone, MapPin, Github, Linkedin, Download, Briefcase, GraduationCap, Menu, X, Eye } from "lucide-react"
 import emailjs from '@emailjs/browser'
-import { useToast } from "@/hooks/use-toast"
+import { useToast } from "@/hooks/use-toast" 
 
 // --- TYPES ---
 interface TrailCell {
@@ -283,7 +283,7 @@ export default function RavinduPortfolio() {
             overflow-hidden group hover:border-cyan-500/30 transition-colors duration-500">
               
               {/* Gradient Overlay on Hover */}
-              <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-transparent opacity-0 group-
+              <div className="absolute inset-0 bg-linear-to-br from-cyan-500/5 to-transparent opacity-0 group-
               hover:opacity-100 transition-opacity duration-500" />
 
               <h2 className="text-3xl font-bold mb-8 relative z-10">
@@ -372,7 +372,7 @@ export default function RavinduPortfolio() {
         
 
         {/* --- MARQUEE --- */}
-        <section className="py-12 overflow-hidden border-y border-white/5 bg-white/[0.01] backdrop-blur-[2px]">
+        <section className="py-12 overflow-hidden border-y border-white/5 bg-white/1 backdrop-blur-[2px]">
           <InfiniteMarquee />
         </section>
 
@@ -401,15 +401,29 @@ export default function RavinduPortfolio() {
               liveUrl="#"
               color="green" 
             />
-
+            
+            
             <ProjectCard
               title="ChatLink"
-              description="ChatLink is a real-time communication platform designed to facilitate seamless and secure messaging. 
-                Built on a Java Spring Boot foundation with a Thymeleaf frontend, it leverages WebSocket technology to deliver instant
-                message synchronization and a responsive user experience across devices. The application features secure user 
-                authentication, support for file attachments within chats, and automated email notifications via API integration. 
-                With a scalable MySQL database for persistence and Docker support for streamlined deployment, ChatLink provides a 
-                reliable, full-stack solution for interactive connectivity."
+              description={
+            <>
+              ChatLink is a real-time communication platform designed to facilitate seamless and secure messaging. 
+              Built on a Java Spring Boot foundation with a Thymeleaf frontend, it leverages WebSocket technology to deliver instant
+              message synchronization and a responsive user experience across devices. The application features secure user 
+              authentication, support for file attachments within chats, and automated email notifications via API integration. 
+              With a scalable MySQL database for persistence and Docker support for streamlined deployment, ChatLink provides a 
+              reliable, full-stack solution for interactive connectivity.
+              
+              
+              <br /><br />
+              
+              {/* Warning Message */}
+              <span className="text-amber-300 font-medium opacity-90">
+                ⚠️ Note: This is a demo deployment. Please do not upload sensitive personal or financial data.
+              </span>
+            </>
+          }
+                
 
               tech={["Java", "Spring Boot", "MySQL", "Thymeleaf", "Docker","WebSocket"]}
               images={["/images/projects/chatlink/chatlink-image1.png",
@@ -457,6 +471,30 @@ export default function RavinduPortfolio() {
               liveUrl="https://sinhala-ocr-converter.vercel.app/" 
               color="pink"
             />
+
+            <ProjectCard
+              title="MemoryServe"
+              description="A secure 'Second Brain' AI application utilizing Retrieval-Augmented Generation (RAG). 
+                It enables users to upload PDF documents or teach the AI manually, storing memories in a MongoDB vector database
+                for contextual recall. Features include a dual-mode interface (Teach/Ask), model switching between Gemini Flash/Pro, 
+                persistent chat history, and robust role-based security with Clerk. "
+
+              tech={["Next.js", "TypeScript", "MongoDB", "Google Gemini", "LangChain", "Clerk"]}
+              images={[
+                "/images/projects/memory-serve/memory-serve-image1.png",
+                "/images/projects/memory-serve/memory-serve-image2.png",
+                "/images/projects/memory-serve/memory-serve-image3.png",
+                "/images/projects/memory-serve/memory-serve-image4.png",
+                "/images/projects/memory-serve/memory-serve-image5.png",
+                
+              ]}
+              codeUrl="https://github.com/RavinAr1/MemoryServe.git"
+              liveUrl="https://memory-serve.vercel.app"
+              color="purple" 
+            />
+
+
+
 
 
           </div>
@@ -524,7 +562,7 @@ function SocialLink({ href, icon, label }: { href: string; icon: React.ReactNode
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="p-4 rounded-2xl transition-all duration-300 flex items-center justify-center bg-white/[0.02] border border-white/5"
+      className="p-4 rounded-2xl transition-all duration-300 flex items-center justify-center bg-white/2 border border-white/5"
       style={{
         transform: isHovered ? "translateY(-5px)" : "translateY(0)",
         boxShadow: isHovered ? "0 0 25px rgba(6, 182, 212, 0.4)" : "none",
@@ -631,7 +669,7 @@ function ContactForm() {
     <form 
       ref={formRef}
       onSubmit={handleSubmit}
-      className="space-y-8 p-8 rounded-3xl border transition-all duration-500 bg-white/[0.02] backdrop-blur-[4px]"
+      className="space-y-8 p-8 rounded-3xl border transition-all duration-500 bg-white/2 backdrop-blur-[4px]"
       style={{
         borderColor: isHovered ? "rgba(6, 182, 212, 0.5)" : "rgba(255, 255, 255, 0.05)",
         boxShadow: isHovered ? "0 0 30px rgba(6, 182, 212, 0.2)" : "none",
@@ -687,7 +725,7 @@ function InfiniteMarquee() {
         transition={{ x: { repeat: Number.POSITIVE_INFINITY, repeatType: "loop", duration: 40, ease: "linear" } }}
       >
         {duplicatedSkills.map((skill, index) => (
-          <div key={index} className="px-8 py-3 bg-white/[0.02] border border-white/5 rounded-full 
+          <div key={index} className="px-8 py-3 bg-white/2 border border-white/5 rounded-full 
           whitespace-nowrap text-gray-400 font-light tracking-wide">
             {skill}
           </div>
@@ -771,7 +809,7 @@ function ProjectCard({ title, description, tech, images, codeUrl, liveUrl, color
   return (
     <div 
       className="grid md:grid-cols-2 gap-10 rounded-3xl overflow-hidden p-6 md:p-8 transition-all duration-500 
-      bg-white/[0.02] backdrop-blur-[4px] border border-white/5"
+      bg-white/2 backdrop-blur-[4px] border border-white/5"
       style={{
         transform: isHovered ? "translateY(-5px)" : "translateY(0)",
         boxShadow: isHovered 
@@ -826,7 +864,7 @@ function ProjectCard({ title, description, tech, images, codeUrl, liveUrl, color
             <span
               key={item}
               className={`px-4 py-1.5 border rounded-full text-sm font-light transition-colors 
-                duration-300 ${isHovered ? theme.pill : "bg-white/[0.02] border-white/10 text-gray-400"}`} // Dynamic Pill Style
+                duration-300 ${isHovered ? theme.pill : "bg-white/2 border-white/10 text-gray-400"}`} // Dynamic Pill Style
             >
               {item}
             </span>
@@ -871,10 +909,10 @@ function TimelineItem({ title, subtitle, date }: { title: string, subtitle: stri
   return (
     <div className="relative group">
       {/* Dot on the line */}
-      <div className="absolute -left-[39px] top-1 w-5 h-5 rounded-full border-2 border-cyan-500/50 bg-[#020617] 
+      <div className="absolute -left-9.75 top-1 w-5 h-5 rounded-full border-2 border-cyan-500/50 bg-[#020617] 
       group-hover:bg-cyan-500 group-hover:shadow-[0_0_10px_rgba(6,182,212,0.6)] transition-all duration-300" />
       
-      <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-cyan-500/30 transition-colors duration-300">
+      <div className="p-6 rounded-2xl bg-white/2 border border-white/5 hover:border-cyan-500/30 transition-colors duration-300">
         <h4 className="text-xl font-medium text-white mb-2">{title}</h4>
         <p className="text-cyan-200/80 mb-1 font-light">{subtitle}</p>
         <p className="text-gray-500 text-sm font-light tracking-wide">{date}</p>
