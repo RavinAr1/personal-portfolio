@@ -405,24 +405,12 @@ export default function RavinduPortfolio() {
             
             <ProjectCard
               title="ChatLink"
-              description={
-            <>
-              ChatLink is a real-time communication platform designed to facilitate seamless and secure messaging. 
-              Built on a Java Spring Boot foundation with a Thymeleaf frontend, it leverages WebSocket technology to deliver instant
-              message synchronization and a responsive user experience across devices. The application features secure user 
-              authentication, support for file attachments within chats, and automated email notifications via API integration. 
-              With a scalable MySQL database for persistence and Docker support for streamlined deployment, ChatLink provides a 
-              reliable, full-stack solution for interactive connectivity.
-              
-              
-              <br /><br />
-              
-              {/* Warning Message */}
-              <span className="text-amber-300 font-medium opacity-90">
-                ⚠️ Note: This is a demo deployment. Please do not upload sensitive personal or financial data.
-              </span>
-            </>
-          }
+              description="ChatLink is a real-time communication platform designed to facilitate seamless and secure messaging. 
+                Built on a Java Spring Boot foundation with a Thymeleaf frontend, it leverages WebSocket technology to deliver instant
+                message synchronization and a responsive user experience across devices. The application features secure user 
+                authentication, support for file attachments within chats, and automated email notifications via API integration. 
+                With a scalable MySQL database for persistence and Docker support for streamlined deployment, ChatLink provides a 
+                reliable, full-stack solution for interactive connectivity."
                 
 
               tech={["Java", "Spring Boot", "MySQL", "Thymeleaf", "Docker","WebSocket"]}
@@ -477,7 +465,8 @@ export default function RavinduPortfolio() {
               description="A secure 'Second Brain' AI application utilizing Retrieval-Augmented Generation (RAG). 
                 It enables users to upload PDF documents or teach the AI manually, storing memories in a MongoDB vector database
                 for contextual recall. Features include a dual-mode interface (Teach/Ask), model switching between Gemini Flash/Pro, 
-                persistent chat history, and robust role-based security with Clerk. "
+                persistent chat history, and robust role-based security with Clerk. This project showcases advanced AI orchestration 
+                and full-stack development with Next.js 15."
 
               tech={["Next.js", "TypeScript", "MongoDB", "Google Gemini", "LangChain", "Clerk"]}
               images={[
@@ -669,7 +658,7 @@ function ContactForm() {
     <form 
       ref={formRef}
       onSubmit={handleSubmit}
-      className="space-y-8 p-8 rounded-3xl border transition-all duration-500 bg-white/2 backdrop-blur-[4px]"
+      className="space-y-8 p-8 rounded-3xl border transition-all duration-500 bg-white/2 backdrop-blur-xs"
       style={{
         borderColor: isHovered ? "rgba(6, 182, 212, 0.5)" : "rgba(255, 255, 255, 0.05)",
         boxShadow: isHovered ? "0 0 30px rgba(6, 182, 212, 0.2)" : "none",
@@ -809,7 +798,7 @@ function ProjectCard({ title, description, tech, images, codeUrl, liveUrl, color
   return (
     <div 
       className="grid md:grid-cols-2 gap-10 rounded-3xl overflow-hidden p-6 md:p-8 transition-all duration-500 
-      bg-white/2 backdrop-blur-[4px] border border-white/5"
+      bg-white/2 backdrop-blur-xs border border-white/5"
       style={{
         transform: isHovered ? "translateY(-5px)" : "translateY(0)",
         boxShadow: isHovered 
