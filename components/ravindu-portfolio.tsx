@@ -2,7 +2,7 @@
 
 import type React from "react"
 import { useEffect, useRef, useState } from "react"
-import { motion } from "framer-motion"
+import { AnimatePresence, motion } from "framer-motion"
 import Image from "next/image" 
 import { Mail, Phone, MapPin, Github, Linkedin, Download, Briefcase, GraduationCap, Menu, X, Eye } from "lucide-react"
 import emailjs from '@emailjs/browser'
@@ -25,6 +25,26 @@ export default function RavinduPortfolio() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   
   const trailRef = useRef<TrailCell[]>([])
+
+
+
+  // Scroll to Top Logic
+  const [showScrollTop, setShowScrollTop] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowScrollTop(window.scrollY > 300)
+    }
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" })
+  }
+
+
+
 
   // --- CONFIGURATION ---
   const GRID_SIZE = 40 
@@ -338,6 +358,14 @@ export default function RavinduPortfolio() {
                 </div>
               </div>
 
+
+
+
+
+
+
+
+
               {/* Experience Column */}
               <div>
                 <h3 className="text-3xl font-light mb-8 flex items-center gap-3 text-cyan-400">
@@ -363,6 +391,7 @@ export default function RavinduPortfolio() {
             </div>
           </div>
         </section>
+
 
 
 
@@ -532,11 +561,42 @@ export default function RavinduPortfolio() {
           <p>© 2025 Ravindu Ariyarathne. All rights reserved.</p>
         </footer>
 
+
+
+
+
+    {/* SCROLL TO TOP BUTTON */}
+      <AnimatePresence>
+        {showScrollTop && (
+          <motion.button
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.5 }}
+            onClick={scrollToTop}
+            className="fixed bottom-8 right-8 p-3 bg-cyan-500/10 border 
+            border-cyan-500/30 text-cyan-400 rounded-full hover:bg-cyan-500 
+            hover:text-black hover:shadow-[0_0_20px_rgba(6,182,212,0.4)] transition-all duration-300 z-50 backdrop-blur-md"
+
+            aria-label="Scroll to top"
+          >
+            <svg  width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" 
+            strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+
+              <path d="m18 15-6-6-6 6"/>
+            </svg>
+          </motion.button>
+        )}
+      </AnimatePresence>
     
       </div>
+      
     </div>
   )
 }
+
+
+
+
 
 
 
@@ -924,4 +984,5 @@ function Input({ placeholder, name, type = "text", required = false }: { placeho
       placeholder={placeholder}
     />
   )
+  
 }
