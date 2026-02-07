@@ -2,7 +2,7 @@
 
 import type React from "react"
 import { useEffect, useRef, useState } from "react"
-import { motion } from "framer-motion"
+import { AnimatePresence, motion } from "framer-motion"
 import Image from "next/image" 
 import { Mail, Phone, MapPin, Github, Linkedin, Download, Briefcase, GraduationCap, Menu, X, Eye } from "lucide-react"
 import emailjs from '@emailjs/browser'
@@ -25,6 +25,26 @@ export default function RavinduPortfolio() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   
   const trailRef = useRef<TrailCell[]>([])
+
+
+
+  // Scroll to Top Logic
+  const [showScrollTop, setShowScrollTop] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowScrollTop(window.scrollY > 300)
+    }
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" })
+  }
+
+
+
 
   // --- CONFIGURATION ---
   const GRID_SIZE = 40 
@@ -338,6 +358,14 @@ export default function RavinduPortfolio() {
                 </div>
               </div>
 
+
+
+
+
+
+
+
+
               {/* Experience Column */}
               <div>
                 <h3 className="text-3xl font-light mb-8 flex items-center gap-3 text-cyan-400">
@@ -369,12 +397,54 @@ export default function RavinduPortfolio() {
 
 
 
-        
+{/* --- TECHNICAL SKILLS SECTION --- */}
+        <section className="py-20 px-6">
+          <div className="container mx-auto max-w-6xl">
+            <h2 className="text-3xl md:text-4xl font-light text-center mb-16 tracking-tight">Technical Skills</h2>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              
+              {/* Frontend */}
+              <SkillCard 
+                title="Frontend Development"
+                skills={["React", "Next.js", "TypeScript", "JavaScript", "Tailwind CSS"]}
+                delay={0}
+              />
 
-        {/* --- MARQUEE --- */}
-        <section className="py-12 overflow-hidden border-y border-white/5 bg-white/1 backdrop-blur-[2px]">
-          <InfiniteMarquee />
+              {/* Backend */}
+              <SkillCard 
+                title="Backend Development"
+                skills={["Java", "Spring Boot", "Python", "Node.js", "FastAPI", "Flask"]}
+                delay={0.1}
+              />
+
+              {/* Database */}
+              <SkillCard 
+                title="Data & AI"
+                skills={["MySQL", "MongoDB", "Machine Learning"]} 
+                delay={0.2}
+              />
+
+              {/* DevOps & Tools */}
+              <SkillCard 
+                title="Cloud & Tools"
+                skills={["Docker", "Git", "Azure", "REST API", "Postman"]}
+                delay={0.3}
+              />
+              
+            </div>
+          </div>
         </section>
+
+
+
+
+
+
+
+
+
+        
 
         {/* --- PROJECTS SECTION --- */}
         <section id="projects" className="py-20 md:py-32 px-4 max-w-7xl mx-auto">
@@ -532,11 +602,42 @@ export default function RavinduPortfolio() {
           <p>© 2025 Ravindu Ariyarathne. All rights reserved.</p>
         </footer>
 
+
+
+
+
+    {/* SCROLL TO TOP BUTTON */}
+      <AnimatePresence>
+        {showScrollTop && (
+          <motion.button
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.5 }}
+            onClick={scrollToTop}
+            className="fixed bottom-8 right-8 p-3 bg-cyan-500/10 border 
+            border-cyan-500/30 text-cyan-400 rounded-full hover:bg-cyan-500 
+            hover:text-black hover:shadow-[0_0_20px_rgba(6,182,212,0.4)] transition-all duration-300 z-50 backdrop-blur-md"
+
+            aria-label="Scroll to top"
+          >
+            <svg  width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" 
+            strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+
+              <path d="m18 15-6-6-6 6"/>
+            </svg>
+          </motion.button>
+        )}
+      </AnimatePresence>
     
       </div>
+      
     </div>
   )
 }
+
+
+
+
 
 
 
@@ -693,36 +794,43 @@ function ContactForm() {
 
 
 
-//Skills Carousel
-function InfiniteMarquee() {
-  const skills = [ 
-    // Frontend
-    "React", "Next.js", "TypeScript", "Tailwind CSS",
-    // Backend
-    "Node.js", "Java", "Spring Boot", "Python", "FastAPI", "Flask", 
-    // Data & Communication
-    "MySQL", "REST API", , "Machine Learning", 
-    // DevOps & Tools
-    "Docker", "Git"]
-  const duplicatedSkills = [...skills, ...skills, ...skills]
-
+// --- SKILL CARD COMPONENT ---
+function SkillCard({ title, skills, delay }: { title: string, skills: string[], delay: number }) {
   return (
-    <div className="relative w-full overflow-hidden">
-      <motion.div
-        className="flex gap-8"
-        animate={{ x: [0, -2000] }}
-        transition={{ x: { repeat: Number.POSITIVE_INFINITY, repeatType: "loop", duration: 40, ease: "linear" } }}
-      >
-        {duplicatedSkills.map((skill, index) => (
-          <div key={index} className="px-8 py-3 bg-white/2 border border-white/5 rounded-full 
-          whitespace-nowrap text-gray-400 font-light tracking-wide">
+    <motion.div 
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay }}
+      viewport={{ once: true }}
+      className="p-6 rounded-2xl bg-white/2 border border-white/5 
+      hover:border-cyan-500/30 transition-all duration-300 group"
+    >
+      <h3 className="text-xl font-medium text-cyan-400 mb-6 pb-2 border-b border-white/5">{title}</h3>
+      <div className="flex flex-wrap gap-2">
+        {skills.map((skill, idx) => (
+          <span 
+            key={idx}
+            className="px-3 py-1 text-sm text-gray-400 bg-white/2 border 
+            border-white/5 rounded-lg group-hover:text-white group-hover:border-white/10 transition-colors"
+          >
             {skill}
-          </div>
+          </span>
         ))}
-      </motion.div>
-    </div>
+      </div>
+    </motion.div>
   )
 }
+
+
+
+
+
+
+
+
+
+
+
 
 // --- PROJECT CARD COMPONENT ---
 // PROJECT CARD
@@ -924,4 +1032,5 @@ function Input({ placeholder, name, type = "text", required = false }: { placeho
       placeholder={placeholder}
     />
   )
+  
 }
