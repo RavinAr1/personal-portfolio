@@ -397,13 +397,54 @@ export default function RavinduPortfolio() {
 
 
 
+{/* --- TECHNICAL SKILLS SECTION --- */}
+        <section className="py-20 px-6">
+          <div className="container mx-auto max-w-6xl">
+            <h2 className="text-3xl md:text-4xl font-light text-center mb-16 tracking-tight">Technical Skills</h2>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              
+              {/* Frontend */}
+              <SkillCard 
+                title="Frontend Development"
+                skills={["React", "Next.js", "TypeScript", "JavaScript", "Tailwind CSS"]}
+                delay={0}
+              />
+
+              {/* Backend */}
+              <SkillCard 
+                title="Backend Development"
+                skills={["Java", "Spring Boot", "Python", "Node.js", "FastAPI", "Flask"]}
+                delay={0.1}
+              />
+
+              {/* Database */}
+              <SkillCard 
+                title="Data & AI"
+                skills={["MySQL", "MongoDB", "Machine Learning"]} 
+                delay={0.2}
+              />
+
+              {/* DevOps & Tools */}
+              <SkillCard 
+                title="Cloud & Tools"
+                skills={["Docker", "Git", "Azure", "REST API", "Postman"]}
+                delay={0.3}
+              />
+              
+            </div>
+          </div>
+        </section>
+
+
+
+
+
+
+
+
 
         
-
-        {/* --- MARQUEE --- */}
-        <section className="py-12 overflow-hidden border-y border-white/5 bg-white/1 backdrop-blur-[2px]">
-          <InfiniteMarquee />
-        </section>
 
         {/* --- PROJECTS SECTION --- */}
         <section id="projects" className="py-20 md:py-32 px-4 max-w-7xl mx-auto">
@@ -753,36 +794,43 @@ function ContactForm() {
 
 
 
-//Skills Carousel
-function InfiniteMarquee() {
-  const skills = [ 
-    // Frontend
-    "React", "Next.js", "TypeScript", "Tailwind CSS",
-    // Backend
-    "Node.js", "Java", "Spring Boot", "Python", "FastAPI", "Flask", 
-    // Data & Communication
-    "MySQL", "REST API", , "Machine Learning", 
-    // DevOps & Tools
-    "Docker", "Git"]
-  const duplicatedSkills = [...skills, ...skills, ...skills]
-
+// --- SKILL CARD COMPONENT ---
+function SkillCard({ title, skills, delay }: { title: string, skills: string[], delay: number }) {
   return (
-    <div className="relative w-full overflow-hidden">
-      <motion.div
-        className="flex gap-8"
-        animate={{ x: [0, -2000] }}
-        transition={{ x: { repeat: Number.POSITIVE_INFINITY, repeatType: "loop", duration: 40, ease: "linear" } }}
-      >
-        {duplicatedSkills.map((skill, index) => (
-          <div key={index} className="px-8 py-3 bg-white/2 border border-white/5 rounded-full 
-          whitespace-nowrap text-gray-400 font-light tracking-wide">
+    <motion.div 
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay }}
+      viewport={{ once: true }}
+      className="p-6 rounded-2xl bg-white/2 border border-white/5 
+      hover:border-cyan-500/30 transition-all duration-300 group"
+    >
+      <h3 className="text-xl font-medium text-cyan-400 mb-6 pb-2 border-b border-white/5">{title}</h3>
+      <div className="flex flex-wrap gap-2">
+        {skills.map((skill, idx) => (
+          <span 
+            key={idx}
+            className="px-3 py-1 text-sm text-gray-400 bg-white/2 border 
+            border-white/5 rounded-lg group-hover:text-white group-hover:border-white/10 transition-colors"
+          >
             {skill}
-          </div>
+          </span>
         ))}
-      </motion.div>
-    </div>
+      </div>
+    </motion.div>
   )
 }
+
+
+
+
+
+
+
+
+
+
+
 
 // --- PROJECT CARD COMPONENT ---
 // PROJECT CARD
