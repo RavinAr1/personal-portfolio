@@ -26,6 +26,7 @@ export default function RavinduPortfolio() {
   
   const trailRef = useRef<TrailCell[]>([])
 
+  const [showAllProjects, setShowAllProjects] = useState(false)
 
 
   // Scroll to Top Logic
@@ -513,6 +514,16 @@ export default function RavinduPortfolio() {
 
 
 
+        {/* --- HIDDEN PROJECTS --- */}
+            <AnimatePresence>
+              {showAllProjects && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: "auto" }}
+                  exit={{ opacity: 0, height: 0 }}
+                  className="space-y-24 overflow-hidden"
+                >
+
             <ProjectCard
               title="Sinhala OCR & Document Converter"
                 description="A specialized OCR tool designed to digitize Sinhala documents, converting scanned PDFs and images
@@ -552,11 +563,33 @@ export default function RavinduPortfolio() {
               color="purple" 
             />
 
+              </motion.div>
+              )}
+            </AnimatePresence>
 
 
-
-
+            {/* SHOW MORE BUTTON */}
+            <div className="flex justify-center pt-12">
+              <button
+                onClick={() => setShowAllProjects(!showAllProjects)}
+                className="px-8 py-3 rounded-full border border-cyan-500/30 text-cyan-400 
+                hover:bg-cyan-500/10 transition-all duration-300 flex items-center gap-2 font-light tracking-wide"
+              >
+                
+                {showAllProjects ? "Show Less" : "Show More Projects"}
+                <svg 
+                  xmlns="http://www.w3.org/2000/svg" 
+                  width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" 
+                  strokeLinecap="round" strokeLinejoin="round"
+                  className={`transition-transform duration-300 ${showAllProjects ? "rotate-180" : ""}`}
+                >
+                  <path d="m6 9 6 6 6-6"/>
+                </svg>
+              </button>
+            </div>
           </div>
+
+
         </section>
 
 
