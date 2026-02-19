@@ -48,7 +48,7 @@ export default function RavinduPortfolio() {
       tech: ["Next.js", "Go", "TypeScript", "Tailwind CSS"],
       githubLink: "https://github.com/RavinAr1/cloud-services-dashboard",
       liveUrl: "",
-      images: [ "/images/minor-projects/cloud-control-dashboard/image-1.png",]
+      images: [ ]
     },
     
   ]
