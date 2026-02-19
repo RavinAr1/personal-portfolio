@@ -28,18 +28,37 @@ export default function RavinduPortfolio() {
   
   const trailRef = useRef<TrailCell[]>([])
 
+  // Project Expander State
   const [showAllProjects, setShowAllProjects] = useState(false)
 
   const [selectedProject, setSelectedProject] = useState<any>(null)
+
+  // Minor Project Expander State
+  const [showAllMinor, setShowAllMinor] = useState(false)
+
+  // Define Minor Projects Data 
+  const minorProjects = [
+    {
+      title: "Cloud Services Dashboard",
+      description: `A unified dashboard designed to monitor statuses of personal cloud infrastructure across 
+          providers like Vercel, Railway, Render, Netlify, Hugging Face, and Oracle Cloud. Built with a Go backend,
+          it aggregates status metrics, monitors service availability and response times, and provides
+          links to service consoles to centralize project management.`,
+
+      tech: ["Next.js", "Go", "TypeScript", "Tailwind CSS"],
+      githubLink: "https://github.com/RavinAr1/cloud-services-dashboard",
+      liveUrl: "",
+      images: [ "/images/minor-projects/cloud-control-dashboard/image-1.png",]
+    },
+    
+  ]
+
+
 
   // Scroll to Top Logic
   const [showScrollTop, setShowScrollTop] = useState(false)
 
   
-
-
-
-
   useEffect(() => {
     const handleScroll = () => {
       setShowScrollTop(window.scrollY > 300)
@@ -607,39 +626,49 @@ export default function RavinduPortfolio() {
 
 
 
-      {/* --- OTHER / MINOR PROJECTS --- */}
+    {/* --- OTHER / MINOR PROJECTS --- */}
           <div className="mt-32">
              <h3 className="text-3xl font-light text-center mb-16 tracking-tight text-gray-200">Other / Minor Projects</h3>
              
-             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+             {/* FLEX CONTAINER */}
+             <div className="flex flex-wrap justify-center gap-6">
                 
-                <MinorProjectCard 
-                   title="Cloud Control Dashboard"
-                   description="A unified dashboard designed to monitor statuses of personal cloud infrastructure across 
-                   providers like Vercel, Railway, Render, Netlify, Hugging Face, and Oracle Cloud. Built with a Go backend, 
-                   it aggregates status metrics, monitors service availability and response times, and provides
-                    links to service consoles to centralize project management."
-                   
+                {/* Show Projects with showAllMinor state */}
+                {(showAllMinor ? minorProjects : minorProjects.slice(0, 3)).map((project, index) => (
+                  <div key={index} className="w-full md:w-[48%] lg:w-[32%]">
+                    <MinorProjectCard 
+                       title={project.title}
+                       description={project.description}
+                       tech={project.tech}
+                       githubLink={project.githubLink}
+                       liveUrl={project.liveUrl}
+                       images={project.images}
+                       onOpenGallery={() => setSelectedProject({
+                         title: project.title,
+                         images: project.images
+                       })}
+                    />
+                  </div>
+                ))}
 
-                   tech={["Next.js", "Go", "TypeScript", "Tailwind CSS", "REST APIs"]}
-                   githubLink="https://github.com/RavinAr1/cloud-services-dashboard"
-                   liveUrl="" 
-
-                   // Gallery Button not visible if the array is empty
-                   images={[
-                     "/images/minor-projects/cloud-control-dashboard/image-1.png",
-                   ]}
-                   
-
-                   //Open Images Gallery
-                   onOpenGallery={() => setSelectedProject({
-                     title: "Cloud Control Dashboard",
-                     images: [ "/images/minor-projects/cloud-control-dashboard/image-1.png",  ]
-                   })}
-                />
-
-            
              </div>
+
+
+             {/* Show More Button */}
+             {minorProjects.length > 3 && (
+               <div className="flex justify-center pt-12">
+                 <button
+                   onClick={() => setShowAllMinor(!showAllMinor)}
+                   className="px-6 py-2 rounded-full border border-white/10 text-gray-400 
+                   hover:bg-white/5 hover:text-white transition-all duration-300 flex items-center gap-2 text-sm font-light"
+                 >
+
+                   {showAllMinor ? "Show Less" : `View All`}
+                   <ChevronRight className={`w-4 h-4 transition-transform duration-300 ${showAllMinor ? 
+                    "-rotate-90" : "rotate-90"}`} />
+                 </button>
+               </div>
+             )}
           </div>
 
 
