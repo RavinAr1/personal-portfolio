@@ -4,7 +4,9 @@ import type React from "react"
 import { useEffect, useRef, useState } from "react"
 import { AnimatePresence, motion } from "framer-motion"
 import Image from "next/image" 
-import { Mail, Phone, MapPin, Github, Linkedin, Download, Briefcase, GraduationCap, Menu, X, Eye } from "lucide-react"
+import { Mail, Phone, MapPin, Github, Linkedin, Download, Briefcase, GraduationCap, Menu, X, Eye, ExternalLink,
+   ChevronLeft, ChevronRight, Image as ImageIcon } from "lucide-react"
+
 import emailjs from '@emailjs/browser'
 import { useToast } from "@/hooks/use-toast" 
 
@@ -26,12 +28,37 @@ export default function RavinduPortfolio() {
   
   const trailRef = useRef<TrailCell[]>([])
 
+  // Project Expander State
   const [showAllProjects, setShowAllProjects] = useState(false)
+
+  const [selectedProject, setSelectedProject] = useState<any>(null)
+
+  // Minor Project Expander State
+  const [showAllMinor, setShowAllMinor] = useState(false)
+
+  // Define Minor Projects Data 
+  const minorProjects = [
+    {
+      title: "Cloud Services Dashboard",
+      description: `A unified dashboard designed to monitor statuses of personal cloud infrastructure across 
+          providers like Vercel, Railway, Render, Netlify, Hugging Face, and Oracle Cloud. Built with a Go backend,
+          it aggregates status metrics, monitors service availability and response times, and provides
+          links to service consoles to centralize project management.`,
+
+      tech: ["Next.js", "Go", "TypeScript", "Tailwind CSS"],
+      githubLink: "https://github.com/RavinAr1/cloud-services-dashboard",
+      liveUrl: "",
+      images: [ ]
+    },
+    
+  ]
+
 
 
   // Scroll to Top Logic
   const [showScrollTop, setShowScrollTop] = useState(false)
 
+  
   useEffect(() => {
     const handleScroll = () => {
       setShowScrollTop(window.scrollY > 300)
@@ -51,6 +78,8 @@ export default function RavinduPortfolio() {
   const GRID_SIZE = 40 
   const GLOW_RADIUS = 120 
   const FADE_SPEED = 0.01 
+
+
 
   // --- CANVAS LOGIC ---
   useEffect(() => {
@@ -80,6 +109,7 @@ export default function RavinduPortfolio() {
 
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height)
+
       
       // Draw Grid
       ctx.strokeStyle = "rgba(255, 255, 255, 0.03)"
@@ -90,6 +120,7 @@ export default function RavinduPortfolio() {
       for (let y = 0; y < canvas.height; y += GRID_SIZE) {
         ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(canvas.width, y); ctx.stroke()
       }
+
 
 
 
@@ -107,7 +138,8 @@ export default function RavinduPortfolio() {
 
 
       
-      // Draw Mouse
+      
+      // Mouse Glow Circle and Trail 
       const mouseGradient = ctx.createRadialGradient(mousePos.x, mousePos.y, 0, mousePos.x, mousePos.y, GLOW_RADIUS)
       mouseGradient.addColorStop(0, "rgba(6, 182, 212, 0.5)")
       mouseGradient.addColorStop(1, "rgba(6, 182, 212, 0)")
@@ -211,6 +243,7 @@ export default function RavinduPortfolio() {
                 priority
               />
             </motion.div>
+
 
             {/* Text Container */}
             <div className="flex flex-col items-center md:items-start text-center md:text-left">
@@ -319,7 +352,7 @@ export default function RavinduPortfolio() {
                 </p>
                 <p>
                   With experience in both frontend and backend ecosystems, I focus on designing and building scalable,
-                   reliable, and user-friendly systems. My approach revolves around continuous learning, improving my craft, 
+                   reliable, and user-friendly systems. My approach revolves around continuous learning, improving my skills, 
                    and delivering high-quality work through practical, real-world problem solving.
                 </p>
               </div>
@@ -333,7 +366,7 @@ export default function RavinduPortfolio() {
 
 
 
-{/* ---  TIMELINE SECTION --- */}
+      {/* ---  TIMELINE SECTION --- */}
         <section className="py-20 px-6">
           <div className="container mx-auto max-w-6xl">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-8">
@@ -398,7 +431,7 @@ export default function RavinduPortfolio() {
 
 
 
-{/* --- TECHNICAL SKILLS SECTION --- */}
+  {/* --- TECHNICAL SKILLS SECTION --- */}
         <section className="py-20 px-6">
           <div className="container mx-auto max-w-6xl">
             <h2 className="text-3xl md:text-4xl font-light text-center mb-16 tracking-tight">Technical Skills</h2>
@@ -568,6 +601,7 @@ export default function RavinduPortfolio() {
             </AnimatePresence>
 
 
+
             {/* SHOW MORE BUTTON */}
             <div className="flex justify-center pt-12">
               <button
@@ -575,7 +609,7 @@ export default function RavinduPortfolio() {
                 className="px-8 py-3 rounded-full border border-cyan-500/30 text-cyan-400 
                 hover:bg-cyan-500/10 transition-all duration-300 flex items-center gap-2 font-light tracking-wide"
               >
-                
+
                 {showAllProjects ? "Show Less" : "Show More Projects"}
                 <svg 
                   xmlns="http://www.w3.org/2000/svg" 
@@ -587,6 +621,54 @@ export default function RavinduPortfolio() {
                 </svg>
               </button>
             </div>
+          </div>
+
+
+
+
+    {/* --- OTHER / MINOR PROJECTS --- */}
+          <div className="mt-32">
+             <h3 className="text-3xl font-light text-center mb-16 tracking-tight text-gray-200">Other / Minor Projects</h3>
+             
+             {/* FLEX CONTAINER */}
+             <div className="flex flex-wrap justify-center gap-6">
+                
+                {/* Show Projects with showAllMinor state */}
+                {(showAllMinor ? minorProjects : minorProjects.slice(0, 3)).map((project, index) => (
+                  <div key={index} className="w-full md:w-[48%] lg:w-[32%]">
+                    <MinorProjectCard 
+                       title={project.title}
+                       description={project.description}
+                       tech={project.tech}
+                       githubLink={project.githubLink}
+                       liveUrl={project.liveUrl}
+                       images={project.images}
+                       onOpenGallery={() => setSelectedProject({
+                         title: project.title,
+                         images: project.images
+                       })}
+                    />
+                  </div>
+                ))}
+
+             </div>
+
+
+             {/* Show More Button */}
+             {minorProjects.length > 3 && (
+               <div className="flex justify-center pt-12">
+                 <button
+                   onClick={() => setShowAllMinor(!showAllMinor)}
+                   className="px-6 py-2 rounded-full border border-white/10 text-gray-400 
+                   hover:bg-white/5 hover:text-white transition-all duration-300 flex items-center gap-2 text-sm font-light"
+                 >
+
+                   {showAllMinor ? "Show Less" : `View All`}
+                   <ChevronRight className={`w-4 h-4 transition-transform duration-300 ${showAllMinor ? 
+                    "-rotate-90" : "rotate-90"}`} />
+                 </button>
+               </div>
+             )}
           </div>
 
 
@@ -636,6 +718,18 @@ export default function RavinduPortfolio() {
         </footer>
 
 
+
+
+
+{/* POPUP IMAGE GALLERY MODAL */}
+      <AnimatePresence>
+        {selectedProject && (
+          <ProjectImageModal 
+            project={selectedProject} 
+            onClose={() => setSelectedProject(null)} 
+          />
+        )}
+      </AnimatePresence>
 
 
 
@@ -744,6 +838,8 @@ function ContactInfo({ icon, label, value, href }: { icon: React.ReactNode; labe
 }
 
 
+
+
 // --- CONTACT FORM COMPONENT ---
 function ContactForm() {
   const [isHovered, setIsHovered] = useState(false)
@@ -754,6 +850,8 @@ function ContactForm() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
+
+
 
     // EmailJS Configuration
     const SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!
@@ -926,7 +1024,7 @@ function ProjectCard({ title, description, tech, images, codeUrl, liveUrl, color
 
 
 
-  //Default to blue if color not found
+  //Default color - blue
   const theme = colorVariants[color] || colorVariants.blue
 
   useEffect(() => {
@@ -1034,6 +1132,219 @@ function ProjectCard({ title, description, tech, images, codeUrl, liveUrl, color
 
 
 
+// --- MINOR PROJECT CARD COMPONENT ---
+function MinorProjectCard({ 
+  title, 
+  description, 
+  tech, 
+  githubLink, 
+  liveUrl,
+  images,
+  onOpenGallery 
+}: { 
+  title: string, 
+  description: string, 
+  tech: string[], 
+  githubLink?: string, 
+  liveUrl?: string,
+  images?: string[],
+  onOpenGallery?: () => void
+}) {
+  
+  const hasGithub = githubLink && githubLink !== "" && githubLink !== "#"
+  const hasLiveUrl = liveUrl && liveUrl !== "" && liveUrl !== "#"
+  const hasImages = images && images.length > 0
+
+  return (
+    <div className="group relative p-8 rounded-3xl bg-white/2 border border-white/5 
+    hover:border-cyan-500/30 transition-all duration-500 flex flex-col h-full">
+      
+      
+      <div className="flex justify-between items-start mb-6">
+         <div className="p-3 rounded-full bg-white/5 text-cyan-400 group-hover:scale-110 transition-transform duration-300">
+            <Briefcase className="w-5 h-5" />
+         </div>
+         
+
+         {/* Gallery Button */}
+         {hasImages && (
+           <button 
+             onClick={onOpenGallery}
+             className="text-gray-500 hover:text-cyan-400 
+             transition-colors flex items-center gap-2 text-xs font-medium bg-white/5 px-3 py-1.5 rounded-full"
+           >
+             <ImageIcon className="w-4 h-4" />
+             Gallery
+           </button>
+         )}
+      </div>
+
+      <h4 className="text-xl font-medium text-white mb-3 group-hover:text-cyan-400 transition-colors">{title}</h4>
+      
+      <p className="text-sm text-gray-400 font-light leading-relaxed mb-6 grow">
+        {description}
+      </p>
+
+      {/* Tech Stack */}
+      <div className="mb-8 flex flex-wrap gap-2">
+         {tech.map((t, i) => (
+           <span key={i} className="text-xs font-light px-2 py-1 rounded bg-white/5 text-gray-300 border border-white/5">
+              {t}
+           </span>
+         ))}
+      </div>
+
+      {/* Conditional Buttons */}
+      <div className="flex gap-3 mt-auto border-t border-white/5 pt-4">
+        {hasGithub && (
+          <a 
+            href={githubLink} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors"
+          >
+            <Github className="w-4 h-4" /> Code
+          </a>
+        )}
+        
+        {hasLiveUrl && (
+          <a 
+            href={liveUrl} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 text-sm text-cyan-500 hover:text-cyan-400 transition-colors ml-auto"
+          >
+            <ExternalLink className="w-4 h-4" /> Live Demo
+          </a>
+        )}
+      </div>
+    </div>
+  )
+}
+
+
+
+
+
+// --- IMAGE GALLERY For Minor / Other Projects ---
+function ProjectImageModal({ project, onClose }: { project: any, onClose: () => void }) {
+  const [currentIndex, setCurrentIndex] = useState(0)
+
+  // Close when pressing Escape key
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose() }
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [onClose])
+
+  if (!project || !project.images || project.images.length === 0) return null
+
+  // Next Image
+  const nextImage = (e: React.MouseEvent) => {
+    e.stopPropagation()
+    setCurrentIndex((prev) => (prev + 1) % project.images.length)
+  }
+
+  // Previous Image
+  const prevImage = (e: React.MouseEvent) => {
+    e.stopPropagation()
+    setCurrentIndex((prev) => (prev - 1 + project.images.length) % project.images.length)
+  }
+
+  return (
+    <div 
+      className="fixed inset-0 z-100 flex items-center justify-center bg-black/90 backdrop-blur-sm p-4 md:p-8"
+      onClick={onClose} 
+    >
+
+
+      {/* Responsive Container to Stack image and text vertically */}
+      <div 
+        className="relative w-[95vw] md:w-auto md:max-w-6xl h-auto max-h-[90vh] flex flex-col 
+        bg-[#020617] rounded-3xl border border-white/10 overflow-hidden shadow-2xl"
+        onClick={(e) => e.stopPropagation()} 
+      >
+        
+        {/* Close Button */}
+        <button 
+          onClick={onClose}
+          className="absolute top-4 right-4 z-20 p-2 bg-black/60 hover:bg-red-500/80 
+          text-white rounded-full transition-colors backdrop-blur-md border border-white/10"
+        >
+          <X className="w-5 h-5" />
+        </button>
+
+        {/* Image Area */}
+        <div className="relative flex-1 min-h-0 bg-black/50 w-full md:min-w-[60vw]">
+          
+          {/* make the whole image can be seen without scrolling. */}
+          <div className="relative w-full h-[50vh] md:h-[70vh]">
+            <Image 
+              src={project.images[currentIndex]} 
+              alt={`${project.title} screenshot ${currentIndex + 1}`} 
+              fill 
+              className="object-contain"
+              priority
+            />
+          </div>
+
+          {/* Navigation Arrows */}
+          {project.images.length > 1 && (
+            <>
+              <button 
+                onClick={prevImage}
+                className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 p-2 md:p-3 bg-black/50 
+                hover:bg-cyan-500 text-white rounded-full transition-all backdrop-blur-md border border-white/10"
+              >
+                <ChevronLeft className="w-5 h-5 md:w-6 md:h-6" />
+              </button>
+              <button 
+                onClick={nextImage}
+                className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 p-2 md:p-3 bg-black/50 
+                hover:bg-cyan-500 text-white rounded-full transition-all backdrop-blur-md border border-white/10"
+              >
+                <ChevronRight className="w-5 h-5 md:w-6 md:h-6" />
+              </button>
+            </>
+          )}
+        </div>
+
+        
+
+        {/* Footer Info */}
+        <div className="p-4 md:p-6 border-t border-white/5 bg-white/2 flex items-center justify-between shrink-0">
+          <div className="flex flex-col">
+             <h3 className="text-lg md:text-xl font-medium text-white">{project.title}</h3>
+             <span className="text-xs text-gray-500 font-mono mt-1">
+               Image {currentIndex + 1} of {project.images.length}
+             </span>
+          </div>
+          
+          {/* Dot Indicators */}
+          {project.images.length > 1 && (
+            <div className="flex gap-1.5 md:gap-2">
+              {project.images.map((_: any, idx: number) => (
+                <button
+                  key={idx}
+                  onClick={() => setCurrentIndex(idx)}
+                  className={`h-1.5 md:h-2 rounded-full transition-all duration-300 ${
+                    idx === currentIndex ? "bg-cyan-400 w-6 md:w-8" : "bg-white/20 w-1.5 md:w-2 hover:bg-white/40"
+                  }`}
+                />
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+
+
+
+
+
 // ---  TIMELINE  ---
 function TimelineItem({ title, subtitle, date }: { title: string, subtitle: string, date: string }) {
   return (
@@ -1042,7 +1353,8 @@ function TimelineItem({ title, subtitle, date }: { title: string, subtitle: stri
       <div className="absolute -left-9.75 top-1 w-5 h-5 rounded-full border-2 border-cyan-500/50 bg-[#020617] 
       group-hover:bg-cyan-500 group-hover:shadow-[0_0_10px_rgba(6,182,212,0.6)] transition-all duration-300" />
       
-      <div className="p-6 rounded-2xl bg-white/2 border border-white/5 hover:border-cyan-500/30 transition-colors duration-300">
+      <div className="p-6 rounded-2xl bg-white/2 border border-white/5 
+      hover:border-cyan-500/30 transition-colors duration-300">
         <h4 className="text-xl font-medium text-white mb-2">{title}</h4>
         <p className="text-cyan-200/80 mb-1 font-light">{subtitle}</p>
         <p className="text-gray-500 text-sm font-light tracking-wide">{date}</p>
@@ -1054,7 +1366,10 @@ function TimelineItem({ title, subtitle, date }: { title: string, subtitle: stri
 
 
 // --- FORM INPUT COMPONENT ---
-function Input({ placeholder, name, type = "text", required = false }: { placeholder: string, name: string, type?: string, required?: boolean }) {
+function Input({ placeholder, name, type = "text", required = false }: 
+  { placeholder: string, name: string, type?: string, required?: boolean }) {
+
+    
   return (
     <input
       type={type}
