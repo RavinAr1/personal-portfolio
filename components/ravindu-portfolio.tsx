@@ -51,6 +51,20 @@ export default function RavinduPortfolio() {
       images: [ ]
     },
     
+
+{
+      title: "Interactive Research Swarm",
+description: `A Multi-Agent Swarm architecture that orchestrates specialized AI agents 
+(Searcher, Synthesizer, Citator) to conduct and verify research. It features hybrid RAG
+ (MongoDB vector search for local PDFs + DuckDuckGo for live web data) and utilizes a custom Blind Citation protocol
+  to eliminate LLM source hallucinations. ( Developed as an entry for the AI Dev Days Hackathon 2026 by Microsoft )`,
+      tech: ["Python", "Streamlit", "Azure OpenAI", "MongoDB Atlas",],
+      githubLink: "https://github.com/RavinAr1/research-swarm",
+      liveUrl: "",
+      images: [ ]
+    },
+
+    
   ]
 
 
