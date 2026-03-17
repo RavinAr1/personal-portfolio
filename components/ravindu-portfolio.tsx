@@ -499,6 +499,40 @@ description: `A Multi-Agent Swarm architecture that orchestrates specialized AI 
           <h2 className="text-4xl md:text-5xl font-light text-center mb-24 tracking-tight">Featured Projects</h2>
           <div className="space-y-24">
             
+
+            <ProjectCard
+              title="MemoryServe"
+              description="A secure 'Second Brain' AI application utilizing Retrieval-Augmented Generation (RAG). 
+                It enables users to upload PDF documents or teach the AI manually, storing memories in a MongoDB vector database
+                for contextual recall. Features include a dual-mode interface (Teach/Ask), model switching between Gemini Flash/Pro, 
+                persistent chat history, and robust role-based security with Clerk. This project showcases advanced AI orchestration 
+                and full-stack development with Next.js 15."
+
+              tech={["Next.js", "TypeScript", "MongoDB", "Google Gemini", "LangChain", "Clerk"]}
+              images={[
+                "/images/projects/memory-serve/memory-serve-image1.png",
+                "/images/projects/memory-serve/memory-serve-image2.png",
+                "/images/projects/memory-serve/memory-serve-image3.png",
+                "/images/projects/memory-serve/memory-serve-image4.png",
+                "/images/projects/memory-serve/memory-serve-image5.png",
+                
+              ]}
+              codeUrl="https://github.com/RavinAr1/MemoryServe.git"
+              liveUrl="https://memory-serve.vercel.app"
+              color="purple" 
+            />
+
+
+
+
+
+
+
+
+
+
+
+
             <ProjectCard
               title="SpendSense"
               description="SpendSense is an AI-powered personal finance advisor that helps users make smarter budgeting,
@@ -542,22 +576,7 @@ description: `A Multi-Agent Swarm architecture that orchestrates specialized AI 
               color="blue" 
             />
 
-            <ProjectCard
-              title="Personal Portfolio"
-              description="A modern, high-performance personal website designed to showcase my software engineering
-                portfolio and professional identity. Built with Next.js and TypeScript, it features a fully responsive, 
-                mobile-first design styled with Tailwind CSS. The application integrates Swiper.js for interactive UI elements,
-                a custom video background for visual engagement, and a serverless contact form powered by EmailJS for direct
-                communication. Deployed on Vercel, this project demonstrates my ability to build polished, scalable frontend solutions."
-       
-              tech={["Next.js", "TypeScript", "Tailwind CSS","EmailJS"]}
-              images={["/images/projects/portfolio-project/my-portfolio-image1.png",
-                    "/images/projects/portfolio-project/my-portfolio-image2.png"]}
-
-              codeUrl="https://github.com/RavinAr1/personal-portfolio"
-              liveUrl="#"
-              color="yellow"
-            />
+            
 
 
 
@@ -588,27 +607,26 @@ description: `A Multi-Agent Swarm architecture that orchestrates specialized AI 
               color="pink"
             />
 
-            <ProjectCard
-              title="MemoryServe"
-              description="A secure 'Second Brain' AI application utilizing Retrieval-Augmented Generation (RAG). 
-                It enables users to upload PDF documents or teach the AI manually, storing memories in a MongoDB vector database
-                for contextual recall. Features include a dual-mode interface (Teach/Ask), model switching between Gemini Flash/Pro, 
-                persistent chat history, and robust role-based security with Clerk. This project showcases advanced AI orchestration 
-                and full-stack development with Next.js 15."
 
-              tech={["Next.js", "TypeScript", "MongoDB", "Google Gemini", "LangChain", "Clerk"]}
-              images={[
-                "/images/projects/memory-serve/memory-serve-image1.png",
-                "/images/projects/memory-serve/memory-serve-image2.png",
-                "/images/projects/memory-serve/memory-serve-image3.png",
-                "/images/projects/memory-serve/memory-serve-image4.png",
-                "/images/projects/memory-serve/memory-serve-image5.png",
-                
-              ]}
-              codeUrl="https://github.com/RavinAr1/MemoryServe.git"
-              liveUrl="https://memory-serve.vercel.app"
-              color="purple" 
+
+            <ProjectCard
+              title="Personal Portfolio"
+              description="A modern, high-performance personal website designed to showcase my software engineering
+                portfolio and professional identity. Built with Next.js and TypeScript, it features a fully responsive, 
+                mobile-first design styled with Tailwind CSS. The application integrates Swiper.js for interactive UI elements,
+                a custom video background for visual engagement, and a serverless contact form powered by EmailJS for direct
+                communication. Deployed on Vercel, this project demonstrates my ability to build polished, scalable frontend solutions."
+       
+              tech={["Next.js", "TypeScript", "Tailwind CSS","EmailJS"]}
+              images={["/images/projects/portfolio-project/my-portfolio-image1.png",
+                    "/images/projects/portfolio-project/my-portfolio-image2.png"]}
+
+              codeUrl="https://github.com/RavinAr1/personal-portfolio"
+              liveUrl="#"
+              color="yellow"
             />
+
+            
 
               </motion.div>
               )}
